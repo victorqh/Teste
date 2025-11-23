@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Actualizar contador del carrito
+function updateCartCount() {
+    const cartBadge = document.getElementById('cart-count');
+    if (cartBadge) {
+        fetch('/Carrito/GetCantidad')
+            .then(response => response.json())
+            .then(data => {
+                cartBadge.textContent = data.cantidad;
+                if (data.cantidad > 0) {
+                    cartBadge.classList.remove('d-none');
+                } else {
+                    cartBadge.textContent = '0';
+                }
+            })
+            .catch(error => console.error('Error al actualizar carrito:', error));
+    }
+}
 
-// Write your JavaScript code.
+// Actualizar cuando carga la página
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+});
