@@ -34,5 +34,10 @@ namespace appTiendaUPN.Services
         {
             return await _productoRepository.GetByIdAsync(id);
         }
+
+        public async Task<IEnumerable<Producto>> GetProductosPorCategoriaAsync(int categoriaId)
+        {
+            return await _productoRepository.GetByCategoriaAsync(categoriaId);
+        }
     }
 }

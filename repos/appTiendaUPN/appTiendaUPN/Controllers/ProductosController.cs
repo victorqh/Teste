@@ -13,9 +13,20 @@ namespace appTiendaUPN.Controllers
         }
 
         // GET: Productos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoriaId)
         {
-            var productos = await _productoService.GetProductosActivosAsync();
+            IEnumerable<appTiendaUPN.Models.Producto> productos;
+            
+            if (categoriaId.HasValue && categoriaId.Value > 0)
+            {
+                productos = await _productoService.GetProductosPorCategoriaAsync(categoriaId.Value);
+                ViewData["CategoriaSeleccionada"] = categoriaId.Value;
+            }
+            else
+            {
+                productos = await _productoService.GetProductosActivosAsync();
+            }
+            
             return View(productos);
         }
 
