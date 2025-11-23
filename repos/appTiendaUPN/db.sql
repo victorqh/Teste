@@ -68,6 +68,9 @@ INSERT INTO categorias (nombre, descripcion) VALUES
 ('Gaming', 'Consolas, accesorios y periféricos gamer'),
 ('Accesorios', 'Accesorios tecnológicos variados');
 
+SELECT pg_get_serial_sequence('categorias', 'categoriaId');
+
+ALTER SEQUENCE public.categorias_categoriaId_seq RESTART WITH 1;
 -- Productos de ejemplo
 
 -- LAPTOPS (Categoría 1)
