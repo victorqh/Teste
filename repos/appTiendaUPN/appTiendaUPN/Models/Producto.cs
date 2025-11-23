@@ -19,12 +19,10 @@ namespace appTiendaUPN.Models
         public string? Descripcion { get; set; }
 
         [Required]
-        [Column("precio")]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column("precio", TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
 
-        [Column("precioanterior")]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column("precioanterior", TypeName = "decimal(18,2)")]
         public decimal? PrecioAnterior { get; set; }
 
         [Required]

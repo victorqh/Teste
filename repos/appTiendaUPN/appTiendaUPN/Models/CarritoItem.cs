@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace appTiendaUPN.Models
 {
-    [Table("carrito_items")]
+    [Table("carritoitems")]
     public class CarritoItem
     {
         [Key]
@@ -23,8 +23,7 @@ namespace appTiendaUPN.Models
         public int Cantidad { get; set; }
 
         [Required]
-        [Column("precio")]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column("precio", TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
 
         // Relaciones
