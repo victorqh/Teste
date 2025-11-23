@@ -1,0 +1,46 @@
+## Visual Studio ##
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results ##
+bin/
+obj/
+out/
+Debug/
+Release/
+
+## ASP.NET / WWWROOT ##
+wwwroot/lib/
+wwwroot/node_modules/
+
+## NuGet ##
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+
+## Logs ##
+*.log
+
+## Resharper ##
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## Rider ##
+.idea/
+
+## Temp files ##
+*.tmp
+*.temp
+
+## Cache ##
+*.cache
+*.db
+
+## Others ##
+node_modules/
+dist/

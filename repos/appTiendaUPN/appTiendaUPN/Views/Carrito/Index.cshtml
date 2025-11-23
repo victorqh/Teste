@@ -1,0 +1,130 @@
+@model appTiendaUPN.Models.Carrito
+@{
+    ViewData["Title"] = "Mi Carrito";
+    var total = Model.Items.Sum(i => i.Precio * i.Cantidad);
+}
+
+<div class="container my-4">
+    <h2 class="mb-4"><i class="bi bi-cart3"></i> Mi Carrito de Compras</h2>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="alert alert-info text-center">
+            <i class="bi bi-cart-x" style="font-size: 3rem;"></i>
+            <h4 class="mt-3">Tu carrito está vacío</h4>
+            <p>¡Agrega productos para comenzar a comprar!</p>
+            <a asp-controller="Productos" asp-action="Index" class="btn btn-primary mt-2">
+                <i class="bi bi-arrow-left"></i> Ver Productos
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        @foreach (var item in Model.Items)
+                        {
+                            <div class="row mb-3 pb-3 border-bottom align-items-center">
+                                <div class="col-md-2">
+                                    @if (!string.IsNullOrEmpty(item.Producto?.ImagenUrl))
+                                    {
+                                        <img src="@item.Producto.ImagenUrl" class="img-fluid rounded" alt="@item.Producto.Nombre">
+                                    }
+                                    else
+                                    {
+                                        <div class="bg-light d-flex align-items-center justify-content-center rounded" style="height: 80px;">
+                                            <i class="bi bi-image text-muted"></i>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="mb-1">@item.Producto?.Nombre</h6>
+                                    <small class="text-muted">@item.Producto?.Categoria?.Nombre</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="mb-0 fw-bold">S/ @item.Precio.ToString("N2")</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <form asp-action="Actualizar" method="post" class="d-inline">
+                                        <input type="hidden" name="productoId" value="@item.ProductoId" />
+                                        <input type="number" name="cantidad" value="@item.Cantidad" min="1" 
+                                               max="@item.Producto?.Stock" class="form-control form-control-sm"
+                                               onchange="this.form.submit()">
+                                    </form>
+                                </div>
+                                <div class="col-md-2 text-end">
+                                    <p class="mb-2 fw-bold text-primary">S/ @((item.Precio * item.Cantidad).ToString("N2"))</p>
+                                    <form asp-action="Remover" method="post" class="d-inline">
+                                        <input type="hidden" name="carritoItemId" value="@item.CarritoItemId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                onclick="return confirm('¿Eliminar este producto?')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <form asp-action="Vaciar" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-danger" 
+                                onclick="return confirm('¿Vaciar todo el carrito?')">
+                            <i class="bi bi-trash3"></i> Vaciar Carrito
+                        </button>
+                    </form>
+                    <a asp-controller="Productos" asp-action="Index" class="btn btn-outline-primary ms-2">
+                        <i class="bi bi-arrow-left"></i> Seguir Comprando
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-receipt"></i> Resumen del Pedido</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal (@Model.Items.Sum(i => i.Cantidad) productos):</span>
+                            <span class="fw-bold">S/ @total.ToString("N2")</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Envío:</span>
+                            <span class="text-success">GRATIS</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="h5">Total:</span>
+                            <span class="h5 text-primary fw-bold">S/ @total.ToString("N2")</span>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-success btn-lg" disabled>
+                                <i class="bi bi-credit-card"></i> Proceder al Pago
+                            </button>
+                            <small class="text-muted text-center mt-2">
+                                <i class="bi bi-shield-check"></i> Compra segura y protegida
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3 shadow-sm">
+                    <div class="card-body">
+                        <h6><i class="bi bi-truck"></i> Información de Envío</h6>
+                        <small class="text-muted">
+                            <ul class="list-unstyled mb-0">
+                                <li>✓ Envío gratis en todos los productos</li>
+                                <li>✓ Entrega en 24-48 horas</li>
+                                <li>✓ Garantía de satisfacción</li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

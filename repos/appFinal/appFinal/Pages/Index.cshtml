@@ -1,0 +1,25 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Página Principal";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenido a appFinal</h1>
+    <p class="lead">Sistema de gestión web con autenticación</p>
+    
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="alert alert-success mt-4">
+            <h4>¡Hola, @User.Identity.Name!</h4>
+            <p>Has iniciado sesión correctamente.</p>
+        </div>
+    }
+    else
+    {
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg mx-2" asp-page="/Account/Login">Iniciar Sesión</a>
+            <a class="btn btn-success btn-lg mx-2" asp-page="/Account/Register">Registrarse</a>
+        </div>
+    }
+</div>
