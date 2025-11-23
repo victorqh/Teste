@@ -191,3 +191,37 @@
         width: 280px;
     }
 </style>
+
+<script>
+    // Auto-scroll para productos destacados
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollContainer = document.querySelector('.productos-scroll');
+        if (scrollContainer) {
+            let scrollAmount = 0;
+            let isScrolling = true;
+            
+            // Auto-scroll continuo
+            const autoScroll = setInterval(() => {
+                if (isScrolling && scrollContainer) {
+                    scrollAmount += 1;
+                    scrollContainer.scrollLeft = scrollAmount;
+                    
+                    // Reiniciar cuando llegue al final
+                    if (scrollAmount >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+                        scrollAmount = 0;
+                    }
+                }
+            }, 30);
+            
+            // Pausar al pasar el mouse
+            scrollContainer.addEventListener('mouseenter', () => {
+                isScrolling = false;
+            });
+            
+            // Reanudar al salir el mouse
+            scrollContainer.addEventListener('mouseleave', () => {
+                isScrolling = true;
+            });
+        }
+    });
+</script>
