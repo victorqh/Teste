@@ -45,3 +45,5 @@ GET http://localhost:8080/api/users
 java -jar "$env:USERPROFILE\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar"
 
 
+cd appFinal_Front
+ng serve
