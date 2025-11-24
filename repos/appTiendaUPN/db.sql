@@ -129,3 +129,8 @@ INSERT INTO productos (nombre, descripcion, precio, precioanterior, stock, image
 ('Teclado Mecánico Keychron', 'K2, Wireless, RGB, Hot-swappable', 499.00, 599.00, 18, 'https://placehold.co/300x200/FF5722/FFF?text=Keychron', 8, true),
 ('Hub USB-C Anker 7 en 1', 'HDMI 4K, USB 3.0, SD/microSD, 100W PD', 199.00, NULL, 35, 'https://placehold.co/300x200/607D8B/FFF?text=Hub+Anker', 8, false),
 ('Cable HDMI 2.1', '2 metros, 8K 60Hz, eARC, Ultra HD', 79.00, 99.00, 50, 'https://placehold.co/300x200/9E9E9E/FFF?text=HDMI', 8, true);
+
+SELECT * FROM productos;
+
+ALTER SEQUENCE productos_productoid_seq RESTART WITH 1;
+
