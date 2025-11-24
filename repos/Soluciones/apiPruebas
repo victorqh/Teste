@@ -16,3 +16,87 @@ POST http://localhost:8080/api/auth/login
 
 ./mvnw clean install -DskipTests
 
+
+
+Description	Resource	Path	Location	Type
+The blank final field authService may not have been initialized	AuthController.java	/appFinal/src/main/java/com/example/demo/controller	line 17	Java Problem
+The blank final field jwtAuthenticationFilter may not have been initialized	SecurityConfig.java	/appFinal/src/main/java/com/example/demo/security	line 25	Java Problem
+The blank final field jwtUtil may not have been initialized	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 18	Java Problem
+The blank final field jwtUtil may not have been initialized	JwtAuthenticationFilter.java	/appFinal/src/main/java/com/example/demo/security	line 21	Java Problem
+The blank final field passwordEncoder may not have been initialized	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 17	Java Problem
+The blank final field passwordEncoder may not have been initialized	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 20	Java Problem
+The blank final field userRepository may not have been initialized	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 16	Java Problem
+The blank final field userRepository may not have been initialized	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 19	Java Problem
+The blank final field userService may not have been initialized	UserController.java	/appFinal/src/main/java/com/example/demo/controller	line 19	Java Problem
+The method getDireccion() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 54	Java Problem
+The method getDireccion() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 68	Java Problem
+The method getDireccion() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 57	Java Problem
+The method getDireccion() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 71	Java Problem
+The method getDireccion() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 96	Java Problem
+The method getDireccion() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 99	Java Problem
+The method getEmail() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 45	Java Problem
+The method getEmail() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 51	Java Problem
+The method getEmail() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 48	Java Problem
+The method getEmail() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 54	Java Problem
+The method getEmail() is undefined for the type User	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 41	Java Problem
+The method getEmail() is undefined for the type User	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 46	Java Problem
+The method getEmail() is undefined for the type User	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 45	Java Problem
+The method getEmail() is undefined for the type User	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 50	Java Problem
+The method getEmail() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 94	Java Problem
+The method getEmail() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 97	Java Problem
+The method getError() is undefined for the type LoginResponse	AuthController.java	/appFinal/src/main/java/com/example/demo/controller	line 24	Java Problem
+The method getError() is undefined for the type LoginResponse	AuthController.java	/appFinal_back/src/main/java/com/example/demo/controller	line 26	Java Problem
+The method getFechaRegistro() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 98	Java Problem
+The method getFechaRegistro() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 101	Java Problem
+The method getNombre() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 50	Java Problem
+The method getNombre() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 66	Java Problem
+The method getNombre() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 53	Java Problem
+The method getNombre() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 69	Java Problem
+The method getNombre() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 93	Java Problem
+The method getNombre() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 96	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 52	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 70	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 70	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 71	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 55	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 73	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 73	Java Problem
+The method getPassword() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 74	Java Problem
+The method getPassword() is undefined for the type LoginRequest	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 23	Java Problem
+The method getPassword() is undefined for the type LoginRequest	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 23	Java Problem
+The method getPassword() is undefined for the type LoginRequest	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 36	Java Problem
+The method getPassword() is undefined for the type LoginRequest	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 27	Java Problem
+The method getPassword() is undefined for the type LoginRequest	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 27	Java Problem
+The method getPassword() is undefined for the type LoginRequest	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 40	Java Problem
+The method getPasswordHash() is undefined for the type User	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 36	Java Problem
+The method getPasswordHash() is undefined for the type User	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 40	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 55	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 55	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 74	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 75	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 58	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 58	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 77	Java Problem
+The method getRol() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 78	Java Problem
+The method getRol() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 97	Java Problem
+The method getRol() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 100	Java Problem
+The method getTelefono() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 53	Java Problem
+The method getTelefono() is undefined for the type CreateUserRequest	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 67	Java Problem
+The method getTelefono() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 56	Java Problem
+The method getTelefono() is undefined for the type CreateUserRequest	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 70	Java Problem
+The method getTelefono() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 95	Java Problem
+The method getTelefono() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 98	Java Problem
+The method getUserId() is undefined for the type User	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 41	Java Problem
+The method getUserId() is undefined for the type User	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 45	Java Problem
+The method getUserId() is undefined for the type User	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 45	Java Problem
+The method getUserId() is undefined for the type User	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 49	Java Problem
+The method getUserId() is undefined for the type User	UserService.java	/appFinal/src/main/java/com/example/demo/service	line 92	Java Problem
+The method getUserId() is undefined for the type User	UserService.java	/appFinal_back/src/main/java/com/example/demo/service	line 95	Java Problem
+The method getUsername() is undefined for the type LoginRequest	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 22	Java Problem
+The method getUsername() is undefined for the type LoginRequest	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 22	Java Problem
+The method getUsername() is undefined for the type LoginRequest	AuthService.java	/appFinal/src/main/java/com/example/demo/service	line 28	Java Problem
+The method getUsername() is undefined for the type LoginRequest	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 26	Java Problem
+The method getUsername() is undefined for the type LoginRequest	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 26	Java Problem
+The method getUsername() is undefined for the type LoginRequest	AuthService.java	/appFinal_back/src/main/java/com/example/demo/service	line 32	Java Problem
+The method isOk() is undefined for the type LoginResponse	AuthController.java	/appFinal/src/main/java/com/example/demo/controller	line 23	Java Problem
+The method isOk() is undefined for the type LoginResponse	AuthController.java	/appFinal_back/src/main/java/com/example/demo/controller	line 25	Java Problem
