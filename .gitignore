@@ -27,6 +27,7 @@ project.lock.json
 
 ## Resharper ##
 _ReSharper*/
+.metadata/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
