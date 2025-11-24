@@ -36,7 +36,7 @@ export class RegisterComponent {
     this.userService.register(this.user).subscribe({
       next: (response) => {
         this.loading.set(false);
-        this.successMessage.set('¡Registro exitoso! Redirigiendo al login...');
+        this.successMessage.set('ï¿½Registro exitoso! Redirigiendo al login...');
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
