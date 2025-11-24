@@ -1,11 +1,22 @@
 POST http://localhost:8080/api/users/register
 {
-  "nombre": "Juan Pérez",
-  "email": "juan@example.com",
-  "password": "miPassword123",
+  "nombre": "Test01",
+  "email": "test01@test.com",
+  "password": "123456",
   "telefono": "1234567890",
   "direccion": "Calle Principal 123",
   "rol": "Cliente"
+}
+
+salio
+{
+    "userId": 1,
+    "nombre": "Test01",
+    "email": "test01@test.com",
+    "telefono": "1234567890",
+    "direccion": "Calle Principal 123",
+    "rol": "Cliente",
+    "fechaRegistro": "2025-11-23T23:41:52.184477"
 }
 
 
@@ -13,6 +24,17 @@ POST http://localhost:8080/api/auth/login
 {
   "email": "juan@example.com",
   "password": "miPassword123"
+}
+
+SALIO
+{
+    "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0MDFAdGVzdC5jb20iLCJ1c2VySWQiOjEsInJvbCI6IkNsaWVudGUiLCJpYXQiOjE3NjM5NTk0NDYsImV4cCI6MTc2NDA0NTg0Nn0.-y33lZu67gC6U8cIqCqkuraocCJrs7HH5H_Dgfk7b_eS0pdOPg7VCc_e9bWIEvpt",
+    "user": {
+        "userId": 1,
+        "nombre": "Test01",
+        "email": "test01@test.com",
+        "rol": "Cliente"
+    }
 }
 
 GET http://localhost:8080/api/users
