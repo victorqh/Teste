@@ -17,39 +17,4 @@ POST http://localhost:8080/api/auth/login
 ./mvnw clean install -DskipTests
 
 
-The method getDireccion() is undefined for the type CreateUserRequest
-The method getDireccion() is undefined for the type CreateUserRequest
-The method getDireccion() is undefined for the type User
-The method getEmail() is undefined for the type CreateUserRequest
-The method getEmail() is undefined for the type CreateUserRequest
-The method getEmail() is undefined for the type User
-The method getEmail() is undefined for the type User
-The method getEmail() is undefined for the type User
-The method getError() is undefined for the type LoginResponse
-The method getFechaRegistro() is undefined for the type User
-The method getNombre() is undefined for the type CreateUserRequest
-The method getNombre() is undefined for the type CreateUserRequest
-The method getNombre() is undefined for the type User
-The method getPassword() is undefined for the type CreateUserRequest
-The method getPassword() is undefined for the type CreateUserRequest
-The method getPassword() is undefined for the type CreateUserRequest
-The method getPassword() is undefined for the type CreateUserRequest
-The method getPassword() is undefined for the type LoginRequest
-The method getPassword() is undefined for the type LoginRequest
-The method getPassword() is undefined for the type LoginRequest
-The method getPasswordHash() is undefined for the type User
-The method getRol() is undefined for the type CreateUserRequest
-The method getRol() is undefined for the type CreateUserRequest
-The method getRol() is undefined for the type CreateUserRequest
-The method getRol() is undefined for the type CreateUserRequest
-The method getRol() is undefined for the type User
-The method getTelefono() is undefined for the type CreateUserRequest
-The method getTelefono() is undefined for the type CreateUserRequest
-The method getTelefono() is undefined for the type User
-The method getUserId() is undefined for the type User
-The method getUserId() is undefined for the type User
-The method getUserId() is undefined for the type User
-The method getUsername() is undefined for the type LoginRequest
-The method getUsername() is undefined for the type LoginRequest
-The method getUsername() is undefined for the type LoginRequest
-The method isOk() is undefined for the type LoginResponse
+java -jar "$env:USERPROFILE\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar"
