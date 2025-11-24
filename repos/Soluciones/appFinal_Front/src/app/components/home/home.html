@@ -1,0 +1,60 @@
+<div class="home-container">
+  <header class="hero">
+    <h1>TechShop - Productos Tecnológicos</h1>
+    <p>Las mejores ofertas en tecnología</p>
+  </header>
+
+  @if (cargando()) {
+    <div class="loading">Cargando...</div>
+  } @else {
+    <!-- Categorías -->
+    <section class="categorias-section">
+      <h2>Categorías</h2>
+      <div class="categorias-grid">
+        @for (categoria of categorias(); track categoria.categoriaId) {
+          <a [routerLink]="['/productos', 'categoria', categoria.categoriaId]" class="categoria-card">
+            <h3>{{ categoria.nombre }}</h3>
+            <p>{{ categoria.descripcion }}</p>
+          </a>
+        }
+      </div>
+    </section>
+
+    <!-- Ofertas -->
+    @if (productosEnOferta().length > 0) {
+      <section class="ofertas-section">
+        <h2>🔥 Ofertas Especiales</h2>
+        <div class="productos-grid">
+          @for (producto of productosEnOferta(); track producto.productoId) {
+            <div class="producto-card oferta">
+              <img [src]="producto.imagenUrl" [alt]="producto.nombre">
+              <h3>{{ producto.nombre }}</h3>
+              <div class="precio-container">
+                @if (producto.precioAnterior) {
+                  <span class="precio-anterior">${{ producto.precioAnterior }}</span>
+                }
+                <span class="precio">${{ producto.precio }}</span>
+              </div>
+              <a [routerLink]="['/productos', producto.productoId]" class="btn-ver">Ver Detalles</a>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    <!-- Productos Destacados -->
+    <section class="destacados-section">
+      <h2>Productos Destacados</h2>
+      <div class="productos-grid">
+        @for (producto of productosDestacados(); track producto.productoId) {
+          <div class="producto-card">
+            <img [src]="producto.imagenUrl" [alt]="producto.nombre">
+            <h3>{{ producto.nombre }}</h3>
+            <p class="precio">${{ producto.precio }}</p>
+            <a [routerLink]="['/productos', producto.productoId]" class="btn-ver">Ver Detalles</a>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>

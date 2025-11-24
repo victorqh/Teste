@@ -1,47 +1,92 @@
-<div class="dashboard">
-  <nav class="navbar">
-    <div class="nav-content">
-      <h1>Dashboard</h1>
-      <div class="user-menu">
-        <span>Bienvenido, {{ currentUser()?.nombre }}</span>
-        <button (click)="logout()" class="btn btn-logout">Cerrar Sesión</button>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Panel de Administración</h1>
+    <p>Bienvenido, {{ currentUser()?.nombre }}</p>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">Cargando datos...</div>
+  } @else {
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Total Productos</h3>
+        <p class="stat-number">{{ totalProductos() }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Productos Activos</h3>
+        <p class="stat-number">{{ productosActivos() }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>En Oferta</h3>
+        <p class="stat-number">{{ productosEnOferta() }}</p>
+      </div>
+      <div class="stat-card warning">
+        <h3>Bajo Stock</h3>
+        <p class="stat-number">{{ productosBajoStock() }}</p>
       </div>
     </div>
-  </nav>
-  
-  <div class="content">
-    <div class="header">
-      <h2>Lista de Usuarios</h2>
-      <button (click)="loadUsers()" class="btn btn-refresh">Actualizar</button>
+
+    <div class="productos-admin">
+      <h2>Gestión de Productos</h2>
+      
+      @if (errorMessage()) {
+        <div class="error-message">{{ errorMessage() }}</div>
+      }
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Estado</th>
+              <th>Oferta</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (producto of productos(); track producto.productoId) {
+              <tr [class.bajo-stock]="producto.stock < 10">
+                <td>{{ producto.productoId }}</td>
+                <td><img [src]="producto.imagenUrl" [alt]="producto.nombre" class="mini-img"></td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ getCategoriaName(producto.categoriaId) }}</td>
+                <td>${{ producto.precio }}</td>
+                <td><span [class.stock-bajo]="producto.stock < 10">{{ producto.stock }}</span></td>
+                <td>
+                  <span class="badge" [class.activo]="producto.estaActivo" [class.inactivo]="!producto.estaActivo">
+                    {{ producto.estaActivo ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </td>
+                <td>
+                  @if (producto.esOferta) {
+                    <span class="badge oferta">OFERTA</span>
+                  } @else {
+                    <span class="badge normal">Normal</span>
+                  }
+                </td>
+                <td>{{ formatDate(producto.fechaCreacion) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-    @if (loading()) {
-      <div class="loading">Cargando usuarios...</div>
-    } @else if (errorMessage()) {
-      <div class="alert alert-error">{{ errorMessage() }}</div>
-    } @else {
-      <div class="users-grid">
-        @for (user of users(); track user.userId) {
-          <div class="user-card">
-            <div class="user-header">
-              <h3>{{ user.nombre }}</h3>
-              <span class="badge" [class.badge-admin]="user.rol === 'Admin'">
-                {{ user.rol }}
-              </span>
-            </div>
-            <div class="user-details">
-              <p><strong>Email:</strong> {{ user.email }}</p>
-              @if (user.telefono) {
-                <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
-              }
-              @if (user.direccion) {
-                <p><strong>Dirección:</strong> {{ user.direccion }}</p>
-              }
-              <p><strong>Registro:</strong> {{ formatDate(user.fechaRegistro) }}</p>
-            </div>
+
+    <div class="categorias-admin">
+      <h2>Categorías</h2>
+      <div class="categorias-list">
+        @for (categoria of categorias(); track categoria.categoriaId) {
+          <div class="categoria-item">
+            <h3>{{ categoria.nombre }}</h3>
+            <p>{{ categoria.descripcion }}</p>
           </div>
         }
       </div>
-    }
-  </div>
+    </div>
+  }
 </div>

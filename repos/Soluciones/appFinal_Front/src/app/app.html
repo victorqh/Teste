@@ -1,1 +1,33 @@
-<router-outlet></router-outlet>
+<nav class="navbar">
+  <div class="nav-container">
+    <a routerLink="/" class="logo">🛒 {{ title() }}</a>
+    
+    <div class="nav-links">
+      <a routerLink="/" class="nav-link">Inicio</a>
+      <a routerLink="/productos" class="nav-link">Productos</a>
+      
+      @if (estaAutenticado()) {
+        <a routerLink="/carrito" class="nav-link carrito-link">
+          🛒 Carrito
+          @if (cantidadCarrito() > 0) {
+            <span class="badge">{{ cantidadCarrito() }}</span>
+          }
+        </a>
+        <a routerLink="/dashboard" class="nav-link">Dashboard</a>
+        <span class="user-name">{{ nombreUsuario() }}</span>
+        <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
+      } @else {
+        <a routerLink="/login" class="nav-link">Iniciar Sesión</a>
+        <a routerLink="/register" class="btn-register">Registrarse</a>
+      }
+    </div>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <p>© 2024 TechShop - Todos los derechos reservados</p>
+</footer>

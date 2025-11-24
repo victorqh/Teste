@@ -1,0 +1,195 @@
+.detalle-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+}
+
+.detalle-content {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-volver {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.3s;
+}
+
+.btn-volver:hover {
+  background: #e0e0e0;
+}
+
+.producto-detalle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.imagen-section {
+  position: relative;
+}
+
+.imagen-section img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.badge-oferta {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #ff6b6b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.info-section h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.categoria {
+  color: #667eea;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.precio-container {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.precio-anterior {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 1.3rem;
+}
+
+.descuento {
+  background: #ff6b6b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.precio {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.descripcion {
+  color: #666;
+  line-height: 1.6;
+  margin: 20px 0;
+  font-size: 1.1rem;
+}
+
+.stock-info {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.stock-disponible {
+  color: #4caf50;
+}
+
+.stock-agotado {
+  color: #f44336;
+}
+
+.cantidad-selector {
+  margin: 30px 0;
+}
+
+.cantidad-selector label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.cantidad-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cantidad-controls button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #667eea;
+  background: white;
+  color: #667eea;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cantidad-controls button:hover:not(:disabled) {
+  background: #667eea;
+  color: white;
+}
+
+.cantidad-controls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cantidad-controls span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  min-width: 50px;
+  text-align: center;
+}
+
+.btn-agregar {
+  width: 100%;
+  padding: 15px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-agregar:hover:not(:disabled) {
+  background: #764ba2;
+}
+
+.btn-agregar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .producto-detalle {
+    grid-template-columns: 1fr;
+  }
+}

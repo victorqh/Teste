@@ -1,0 +1,67 @@
+<div class="detalle-container">
+  @if (cargando()) {
+    <div class="loading">Cargando producto...</div>
+  } @else if (producto()) {
+    <div class="detalle-content">
+      <button (click)="volver()" class="btn-volver">← Volver a productos</button>
+      
+      <div class="producto-detalle">
+        <div class="imagen-section">
+          <img [src]="producto()!.imagenUrl" [alt]="producto()!.nombre">
+          @if (producto()!.esOferta) {
+            <span class="badge-oferta">OFERTA</span>
+          }
+        </div>
+
+        <div class="info-section">
+          <h1>{{ producto()!.nombre }}</h1>
+          <p class="categoria">{{ producto()!.categoriaNombre }}</p>
+          
+          <div class="precio-container">
+            @if (producto()!.precioAnterior) {
+              <span class="precio-anterior">${{ producto()!.precioAnterior }}</span>
+              <span class="descuento">
+                -{{ ((producto()!.precioAnterior! - producto()!.precio) / producto()!.precioAnterior! * 100).toFixed(0) }}%
+              </span>
+            }
+            <span class="precio">${{ producto()!.precio }}</span>
+          </div>
+
+          <p class="descripcion">{{ producto()!.descripcion }}</p>
+
+          <div class="stock-info">
+            @if (producto()!.stock > 0) {
+              <span class="stock-disponible">✓ Stock disponible: {{ producto()!.stock }} unidades</span>
+            } @else {
+              <span class="stock-agotado">✗ Producto agotado</span>
+            }
+          </div>
+
+          @if (producto()!.stock > 0) {
+            <div class="cantidad-selector">
+              <label>Cantidad:</label>
+              <div class="cantidad-controls">
+                <button (click)="disminuirCantidad()" [disabled]="cantidad() <= 1">-</button>
+                <span>{{ cantidad() }}</span>
+                <button (click)="aumentarCantidad()" [disabled]="cantidad() >= producto()!.stock">+</button>
+              </div>
+            </div>
+
+            <button 
+              (click)="agregarAlCarrito()" 
+              [disabled]="agregandoCarrito()"
+              class="btn-agregar">
+              @if (agregandoCarrito()) {
+                Agregando...
+              } @else {
+                Agregar al Carrito
+              }
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="error">Producto no encontrado</div>
+  }
+</div>

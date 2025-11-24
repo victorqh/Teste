@@ -1,0 +1,21 @@
+package com.example.appfinal_backend.dto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CarritoDTO {
+    private Integer carritoId;
+    private Integer userId;
+    private LocalDateTime fechaCreacion;
+    private List<CarritoItemDTO> items;
+    private BigDecimal total;
+    private Integer cantidadItems;
+}

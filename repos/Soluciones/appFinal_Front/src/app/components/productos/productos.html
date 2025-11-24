@@ -1,0 +1,63 @@
+<div class="productos-container">
+  <h1>Productos</h1>
+
+  <!-- Barra de búsqueda y filtros -->
+  <div class="filtros">
+    <input 
+      type="text" 
+      placeholder="Buscar productos..." 
+      [(ngModel)]="busqueda"
+      (input)="buscar()"
+      class="search-input">
+    
+    <div class="categorias-filtro">
+      <button 
+        (click)="filtrarPorCategoria(null)"
+        [class.active]="categoriaSeleccionada() === null"
+        class="btn-filtro">
+        Todas
+      </button>
+      @for (categoria of categorias(); track categoria.categoriaId) {
+        <button 
+          (click)="filtrarPorCategoria(categoria.categoriaId)"
+          [class.active]="categoriaSeleccionada() === categoria.categoriaId"
+          class="btn-filtro">
+          {{ categoria.nombre }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Lista de productos -->
+  @if (cargando()) {
+    <div class="loading">Cargando productos...</div>
+  } @else if (productosFiltrados().length === 0) {
+    <div class="no-productos">No se encontraron productos</div>
+  } @else {
+    <div class="productos-grid">
+      @for (producto of productosFiltrados(); track producto.productoId) {
+        <div class="producto-card" [class.sin-stock]="producto.stock === 0">
+          @if (producto.esOferta) {
+            <span class="badge-oferta">OFERTA</span>
+          }
+          @if (producto.stock === 0) {
+            <span class="badge-agotado">AGOTADO</span>
+          }
+          <img [src]="producto.imagenUrl" [alt]="producto.nombre">
+          <h3>{{ producto.nombre }}</h3>
+          <p class="descripcion">{{ producto.descripcion }}</p>
+          <div class="precio-stock">
+            <div class="precio-container">
+              @if (producto.precioAnterior) {
+                <span class="precio-anterior">${{ producto.precioAnterior }}</span>
+              }
+              <span class="precio">${{ producto.precio }}</span>
+            </div>
+            <span class="stock">Stock: {{ producto.stock }}</span>
+          </div>
+          <a [routerLink]="['/productos', producto.productoId]" class="btn-ver">Ver Detalles</a>
+        </div>
+      }
+    </div>
+  }
+</div>

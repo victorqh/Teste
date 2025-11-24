@@ -1,0 +1,67 @@
+<div class="carrito-container">
+  <h1>Carrito de Compras</h1>
+
+  @if (cargando()) {
+    <div class="loading">Cargando carrito...</div>
+  } @else if (!carrito() || carrito()!.items.length === 0) {
+    <div class="carrito-vacio">
+      <p>Tu carrito está vacío</p>
+      <a routerLink="/productos" class="btn-seguir">Continuar Comprando</a>
+    </div>
+  } @else {
+    <div class="carrito-content">
+      <div class="items-section">
+        @for (item of carrito()!.items; track item.carritoItemId) {
+          <div class="carrito-item">
+            <img [src]="item.productoImagen" [alt]="item.productoNombre">
+            
+            <div class="item-info">
+              <h3>{{ item.productoNombre }}</h3>
+              <p class="precio-unitario">Precio: ${{ item.precioUnitario }}</p>
+            </div>
+
+            <div class="cantidad-controls">
+              <button (click)="actualizarCantidad(item.carritoItemId, item.cantidad - 1)">-</button>
+              <span>{{ item.cantidad }}</span>
+              <button (click)="actualizarCantidad(item.carritoItemId, item.cantidad + 1)">+</button>
+            </div>
+
+            <div class="item-subtotal">
+              <p class="subtotal">${{ item.subtotal }}</p>
+            </div>
+
+            <button (click)="eliminarItem(item.carritoItemId)" class="btn-eliminar">
+              🗑️
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="resumen-section">
+        <h2>Resumen de Compra</h2>
+        <div class="resumen-detalle">
+          <div class="resumen-item">
+            <span>Cantidad de productos:</span>
+            <span>{{ carrito()!.cantidadItems }}</span>
+          </div>
+          <div class="resumen-item total">
+            <span>Total:</span>
+            <span>${{ carrito()!.total }}</span>
+          </div>
+        </div>
+
+        <button (click)="procesarCompra()" class="btn-comprar">
+          Proceder a Pagar
+        </button>
+
+        <button (click)="vaciarCarrito()" class="btn-vaciar">
+          Vaciar Carrito
+        </button>
+
+        <a routerLink="/productos" class="btn-seguir">
+          Seguir Comprando
+        </a>
+      </div>
+    </div>
+  }
+</div>

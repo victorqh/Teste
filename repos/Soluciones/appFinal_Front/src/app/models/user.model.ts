@@ -31,3 +31,48 @@ export interface LoginResponse {
     rol: string;
   };
 }
+
+export interface Categoria {
+  categoriaId: number;
+  nombre: string;
+  descripcion: string;
+}
+
+export interface Producto {
+  productoId: number;
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  precioAnterior?: number;
+  stock: number;
+  imagenUrl: string;
+  categoriaId: number;
+  categoriaNombre?: string;
+  estaActivo: boolean;
+  esOferta: boolean;
+  fechaCreacion: string;
+}
+
+export interface CarritoItem {
+  carritoItemId: number;
+  productoId: number;
+  productoNombre: string;
+  productoImagen: string;
+  precioUnitario: number;
+  cantidad: number;
+  subtotal: number;
+}
+
+export interface Carrito {
+  carritoId: number;
+  userId: number;
+  fechaCreacion: string;
+  items: CarritoItem[];
+  total: number;
+  cantidadItems: number;
+}
+
+export interface AgregarAlCarritoRequest {
+  productoId: number;
+  cantidad: number;
+}
