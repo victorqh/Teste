@@ -1,18 +1,21 @@
-POST http://localhost:8080/api/users
+POST http://localhost:8080/api/users/register
 {
-  "nombre": "Test",
-  "email": "test@test.com",
-  "password": "123456",
+  "nombre": "Juan Pérez",
+  "email": "juan@example.com",
+  "password": "miPassword123",
+  "telefono": "1234567890",
+  "direccion": "Calle Principal 123",
   "rol": "Cliente"
 }
 
 
 POST http://localhost:8080/api/auth/login
 {
-  "username": "test@test.com",
-  "password": "123456"
+  "email": "juan@example.com",
+  "password": "miPassword123"
 }
 
+GET http://localhost:8080/api/users
 
 ./mvnw clean install -DskipTests
 
