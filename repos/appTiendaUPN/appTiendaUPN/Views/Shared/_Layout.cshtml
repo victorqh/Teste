@@ -91,14 +91,14 @@
     
     @if (ViewData["HideContainer"] as bool? == true)
     {
-        <main role="main" style="margin-bottom: 370px;">
+        <main role="main" style="margin-bottom: 120px;">
             @RenderBody()
         </main>
     }
     else
     {
         <div class="container">
-            <main role="main" class="py-4" style="margin-bottom: 340px;">
+            <main role="main" class="py-4" style="margin-bottom: 120px;">
                 @RenderBody()
             </main>
         </div>
@@ -114,8 +114,8 @@
                 <div class="col-md-4">
                     <h6 class="fw-bold">Enlaces</h6>
                     <ul class="list-unstyled small">
-                        <li><a href="#" class="text-decoration-none">Sobre Nosotros</a></li>
-                        <li><a href="#" class="text-decoration-none">Términos y Condiciones</a></li>
+                        <li><span class="text-muted">Sobre Nosotros</span></li>
+                        <li><span class="text-muted">Términos y Condiciones</span></li>
                         <li><a asp-controller="Home" asp-action="Privacy" class="text-decoration-none">Privacidad</a></li>
                     </ul>
                 </div>
