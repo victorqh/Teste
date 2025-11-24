@@ -88,11 +88,21 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="py-4" style="margin-bottom: 340px;">
+    
+    @if (ViewData["HideContainer"] as bool? == true)
+    {
+        <main role="main" style="margin-bottom: 120px;">
             @RenderBody()
         </main>
-    </div>
+    }
+    else
+    {
+        <div class="container">
+            <main role="main" class="py-4" style="margin-bottom: 120px;">
+                @RenderBody()
+            </main>
+        </div>
+    }
 
     <footer class="border-top footer text-muted bg-light">
         <div class="container py-3">

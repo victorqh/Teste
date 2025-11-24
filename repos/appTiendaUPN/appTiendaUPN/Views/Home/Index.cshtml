@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<appTiendaUPN.Models.Producto>
 @{
     ViewData["Title"] = "Inicio";
+    ViewData["HideContainer"] = true; // Indicador para no usar container en esta vista
 }
 
-<!-- Hero Section -->
-<div class="bg-primary text-white py-5">
-    <div class="container">
+<!-- Hero Section integrado con navbar -->
+<div class="bg-primary text-white py-5" style="margin-top: -20px;">
+    <div class="container py-4">
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h1 class="display-3 fw-bold">TechStore UPN</h1>
@@ -27,6 +28,7 @@
     </div>
 </div>
 
+<div class="bg-white">
 <!-- Features -->
 <div class="container my-5">
     <div class="row text-center">
