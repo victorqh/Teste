@@ -88,6 +88,136 @@ dotnet run
 
 Por defecto, todos los usuarios se registran con el rol "Cliente". Puedes extender esto para agregar más roles (Admin, etc.) en el futuro.
 
+## 🔄 Flujo de Consultas SQL
+
+El proyecto implementa el patrón **Repository + Service + Controller** para separar responsabilidades:
+
+```
+VISTA → CONTROLLER → SERVICE → REPOSITORY → ENTITY FRAMEWORK CORE → POSTGRESQL
+```
+
+### Ejemplo: Obtener productos activos
+
+1. **Vista** (`Productos/Index.cshtml`): Usuario accede a la página de productos
+2. **Controller** (`ProductosController.cs`):
+   ```csharp
+   public async Task<IActionResult> Index(int? categoriaId)
+   {
+       productos = await _productoService.GetProductosActivosAsync();
+       return View(productos);
+   }
+   ```
+
+3. **Service** (`ProductoService.cs`):
+   ```csharp
+   public async Task<IEnumerable<Producto>> GetProductosActivosAsync()
+   {
+       return await _productoRepository.GetActivosAsync();
+   }
+   ```
+
+4. **Repository** (`ProductoRepository.cs`):
+   ```csharp
+   public async Task<IEnumerable<Producto>> GetActivosAsync()
+   {
+       return await _context.Productos
+           .Include(p => p.Categoria)  // JOIN
+           .Where(p => p.EstaActivo && p.Stock > 0)
+           .OrderByDescending(p => p.FechaCreacion)
+           .ToListAsync();
+   }
+   ```
+
+5. **Entity Framework Core** traduce el LINQ a SQL:
+   ```sql
+   SELECT p.*, c.*
+   FROM productos p
+   INNER JOIN categorias c ON p.categoriaid = c.categoriaid
+   WHERE p.estaactivo = true AND p.stock > 0
+   ORDER BY p.fechacreacion DESC;
+   ```
+
+6. **PostgreSQL** ejecuta la consulta y devuelve los resultados
+
+### Ventajas del patrón
+
+- ✅ **Separación de responsabilidades**: Cada capa tiene un propósito específico
+- ✅ **Testeable**: Puedes hacer mocks de repositorios para pruebas
+- ✅ **Mantenible**: Cambios en la BD no afectan al Controller
+- ✅ **Reutilizable**: Múltiples controllers pueden usar el mismo service
+
+### Inyección de Dependencias
+
+En `Program.cs` se registran las interfaces y sus implementaciones:
+```csharp
+builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<IProductoService, ProductoService>();
+builder.Services.AddScoped<ICarritoRepository, CarritoRepository>();
+builder.Services.AddScoped<ICarritoService, CarritoService>();
+```
+
+**AddScoped** crea una instancia nueva por cada petición HTTP.
+
+## 🛡️ Autorización con [Authorize]
+
+El atributo `[Authorize]` protege controllers o actions para que solo usuarios autenticados puedan acceder.
+
+### Implementación en el proyecto
+
+En `CarritoController.cs`:
+```csharp
+[Authorize]  // Protege TODO el controller
+public class CarritoController : Controller
+{
+    // Todos estos métodos requieren login:
+    public async Task<IActionResult> Index() { }
+    public async Task<IActionResult> Agregar(int productoId) { }
+    public async Task<IActionResult> Eliminar(int itemId) { }
+}
+```
+
+### Flujo de autorización
+
+1. **Usuario no autenticado** intenta acceder a `/Carrito`
+2. **Middleware de autorización** detecta que falta autenticación
+3. **Redirección automática** a `/Account/Login?ReturnUrl=/Carrito`
+4. **Usuario inicia sesión** correctamente
+5. **Redirección de vuelta** a `/Carrito` (la URL original)
+
+### Configuración en Program.cs
+
+```csharp
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromHours(2);
+    });
+```
+
+### Uso en vistas
+
+En las vistas Razor puedes verificar autenticación:
+```csharp
+@if (User.Identity!.IsAuthenticated)
+{
+    <span>Hola, @User.Identity.Name</span>
+    <a href="/Account/Logout">Cerrar Sesión</a>
+}
+else
+{
+    <a href="/Account/Login">Iniciar Sesión</a>
+}
+```
+
+### Variantes del atributo
+
+- `[Authorize]` - Requiere cualquier usuario autenticado
+- `[Authorize(Roles = "Admin")]` - Solo usuarios con rol Admin
+- `[AllowAnonymous]` - Permite acceso sin autenticación (excepción en controller protegido)
+
 ## 🎨 Interfaz
 
 - Diseño responsive con **Bootstrap 5**
