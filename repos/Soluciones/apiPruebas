@@ -22,8 +22,8 @@ salio
 
 POST http://localhost:8080/api/auth/login
 {
-  "email": "juan@example.com",
-  "password": "miPassword123"
+  "email": "test01@test.com",
+  "password": "123456"
 }
 
 SALIO
