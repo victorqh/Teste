@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Lista de Artículos</h2>
+
+  <div *ngIf="loading" class="loading">Cargando artículos...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="!loading && articulos.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let articulo of articulos">
+        <td>{{ articulo.id }}</td>
+        <td>{{ articulo.descripcion }}</td>
+        <td>S/ {{ articulo.precio | number:'1.2-2' }}</td>
+        <td>{{ articulo.tipoNombre }}</td>
+        <td>
+          <button class="btn-delete" (click)="eliminar(articulo.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && articulos.length === 0" class="no-data">
+    No hay artículos registrados
+  </div>
+</div>

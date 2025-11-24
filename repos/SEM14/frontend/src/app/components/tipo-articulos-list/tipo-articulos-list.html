@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Tipos de Artículos</h2>
+
+  <div *ngIf="loading" class="loading">Cargando tipos...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="!loading && tipoArticulos.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tipo of tipoArticulos">
+        <td>{{ tipo.id }}</td>
+        <td>{{ tipo.nombre }}</td>
+        <td>
+          <button class="btn-delete" (click)="eliminar(tipo.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && tipoArticulos.length === 0" class="no-data">
+    No hay tipos de artículos registrados
+  </div>
+</div>
