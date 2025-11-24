@@ -56,6 +56,10 @@ CREATE TABLE carritoitems (
         REFERENCES productos(productoid)
 );
 
+CREATE INDEX idx_productos_categoria ON productos(categoriaid);
+CREATE INDEX idx_productos_activo ON productos(estaactivo);
+CREATE INDEX idx_carritos_user ON carritos(userid);
+CREATE INDEX idx_carritoitems_carrito ON carritoitems(carritoid);
 
 -- Categorías
 INSERT INTO categorias (nombre, descripcion) VALUES
