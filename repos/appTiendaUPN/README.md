@@ -224,3 +224,46 @@ else
 - Formularios con validaciones en tiempo real
 - Mensajes de error y éxito
 - Navbar dinámico según estado de autenticación
+
+
+
+Framework principal: ASP.NET Core MVC (C#)
+Base de datos: PostgreSQL
+ORM: Entity Framework Core
+Dependencias principales:
+Npgsql.EntityFrameworkCore.PostgreSQL (conexión a PostgreSQL)
+BCrypt.Net-Next (hash de contraseñas)
+Front-end: Razor Views (.cshtml) con Bootstrap 5 y Bootstrap Icons
+Seguridad:
+Autenticación por cookies
+Contraseñas hasheadas con BCrypt
+Validaciones en formularios
+Protección contra CSRF
+Arquitectura:
+Patrón MVC
+Repositories y Services para separar lógica de negocio y acceso a datos
+Funcionalidades:
+Registro y login de usuarios
+Catálogo de productos, ofertas, búsqueda
+Carrito de compras
+Navbar dinámico según autenticación
+No se usó PHP ni HTML puro; todo el front está en Razor y Bootstrap.
+
+
+
+La seguridad por cookies en ASP.NET Core funciona así:
+
+Cuando un usuario inicia sesión correctamente, el servidor crea una cookie de autenticación y la envía al navegador.
+Esta cookie contiene información cifrada sobre la identidad del usuario (no la contraseña), y se almacena en el navegador.
+En cada petición siguiente, el navegador envía la cookie al servidor.
+El servidor valida la cookie y, si es válida, reconoce al usuario como autenticado.
+Si la cookie no existe o no es válida, el usuario no tiene acceso a las páginas protegidas.
+Las cookies pueden expirar, y se pueden invalidar al cerrar sesión. Todo el proceso es seguro si usas HTTPS y no guardas información sensible directamente en la cookie.
+
+
+Cuando un usuario inicia sesión en la página de Login, el controlador valida el usuario y la contraseña.
+Si son correctos, el servidor crea una cookie de autenticación y la envía al navegador del usuario.
+En cada visita a una página protegida, el navegador envía esa cookie al servidor.
+El servidor verifica la cookie y, si es válida, permite el acceso a las páginas protegidas (por ejemplo, el carrito, las ofertas, etc.).
+Si la cookie no está presente o no es válida (por ejemplo, si el usuario no ha iniciado sesión o la cookie expiró), el usuario es redirigido a la página de Login o a AccessDenied.
+Así, tu web usa cookies para recordar qué usuario está autenticado y proteger las páginas privadas. Todo esto se maneja automáticamente por ASP.NET Core y el middleware de autenticación por cookies.

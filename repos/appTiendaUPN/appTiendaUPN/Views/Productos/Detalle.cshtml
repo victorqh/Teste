@@ -104,4 +104,42 @@
             </a>
         </div>
     </div>
+
+    <!-- -- ia: Recomendaciones de productos -->
+    @{
+        var recomendaciones = ViewData["Recomendaciones"] as IEnumerable<appTiendaUPN.Models.Producto>;
+    }
+    @if (recomendaciones != null && recomendaciones.Any())
+    {
+        <div class="mt-5">
+            <h4><i class="bi bi-stars text-info"></i> Recomendaciones para ti</h4>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                @foreach (var rec in recomendaciones)
+                {
+                    <div class="col">
+                        <div class="card h-100 shadow-sm hover-card">
+                            @if (!string.IsNullOrEmpty(rec.ImagenUrl))
+                            {
+                                <img src="@rec.ImagenUrl" class="card-img-top" alt="@rec.Nombre" style="height: 120px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 120px;">
+                                    <i class="bi bi-image text-muted" style="font-size: 2rem;"></i>
+                                </div>
+                            }
+                            <div class="card-body">
+                                <h6 class="card-title">@rec.Nombre</h6>
+                                <p class="card-text text-muted small">S/ @rec.Precio.ToString("N2")</p>
+                                <a asp-action="Detalle" asp-route-id="@rec.ProductoId" class="btn btn-outline-primary btn-sm w-100">
+                                    <i class="bi bi-eye"></i> Ver Detalle
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    <!-- -- config para ia: Fin recomendaciones -->
 </div>

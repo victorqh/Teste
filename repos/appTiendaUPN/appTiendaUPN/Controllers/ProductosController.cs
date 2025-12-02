@@ -6,10 +6,12 @@ namespace appTiendaUPN.Controllers
     public class ProductosController : Controller
     {
         private readonly IProductoService _productoService;
+        private readonly RecomendacionService _recomendacionService;
 
-        public ProductosController(IProductoService productoService)
+        public ProductosController(IProductoService productoService, RecomendacionService recomendacionService)
         {
             _productoService = productoService;
+            _recomendacionService = recomendacionService;
         }
 
         // GET: Productos
@@ -39,6 +41,10 @@ namespace appTiendaUPN.Controllers
             {
                 return NotFound();
             }
+
+            // -- config para ia: Obtener recomendaciones
+            var recomendaciones = await _recomendacionService.RecomendarAsync(producto);
+            ViewData["Recomendaciones"] = recomendaciones;
 
             return View(producto);
         }
