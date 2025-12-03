@@ -1,0 +1,82 @@
+@model IEnumerable<appUPN.Models.Producto>
+
+@{
+    ViewData["Title"] = "Catálogo de Productos";
+}
+
+<div class="container">
+    <h1 class="my-4">@ViewData["Title"]</h1>
+
+    <!-- Filtro por categorías -->
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-outline-primary @(ViewBag.CategoriaSeleccionada == null ? "active" : "")">
+            Todas
+        </a>
+        @foreach (var categoria in ViewBag.Categorias)
+        {
+            <a asp-action="Index" 
+               asp-route-categoriaId="@categoria.CategoriaId" 
+               class="btn btn-outline-primary @(ViewBag.CategoriaSeleccionada == categoria.CategoriaId ? "active" : "")">
+                @categoria.Nombre
+            </a>
+        }
+        <a asp-action="Ofertas" class="btn btn-outline-danger">
+            <i class="bi bi-tag-fill"></i> Ofertas
+        </a>
+    </div>
+
+    <!-- Grid de productos -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var producto in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        @if (producto.EsOferta)
+                        {
+                            <span class="badge bg-danger position-absolute top-0 end-0 m-2">¡Oferta!</span>
+                        }
+                        <img src="@(producto.ImagenUrl ?? "https://placehold.co/300x200/EEE/999?text=Sin+Imagen")" 
+                             class="card-img-top" 
+                             alt="@producto.Nombre"
+                             style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">@producto.Nombre</h5>
+                            <p class="text-muted small">@producto.Categoria?.Nombre</p>
+                            <p class="card-text">
+                                @if (producto.PrecioAnterior.HasValue && producto.PrecioAnterior > producto.Precio)
+                                {
+                                    <span class="text-decoration-line-through text-muted">S/ @producto.PrecioAnterior.Value.ToString("N2")</span>
+                                    <br />
+                                }
+                                <strong class="fs-4 text-success">S/ @producto.Precio.ToString("N2")</strong>
+                            </p>
+                            <p class="small">
+                                @if (producto.Stock > 0)
+                                {
+                                    <span class="text-success">En stock: @producto.Stock unidades</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Agotado</span>
+                                }
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <a asp-action="Detalle" asp-route-id="@producto.ProductoId" class="btn btn-primary w-100">
+                                Ver Detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No hay productos disponibles en esta categoría.
+        </div>
+    }
+</div>

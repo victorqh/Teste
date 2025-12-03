@@ -1,0 +1,108 @@
+@model appUPN.Models.Producto
+
+@{
+    ViewData["Title"] = Model.Nombre;
+}
+
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Productos" asp-action="Index">Productos</a></li>
+            <li class="breadcrumb-item active">@Model.Nombre</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Imagen del producto -->
+        <div class="col-md-6">
+            <img src="@(Model.ImagenUrl ?? "https://placehold.co/600x400/EEE/999?text=Sin+Imagen")" 
+                 class="img-fluid rounded shadow" 
+                 alt="@Model.Nombre">
+        </div>
+
+        <!-- Detalles del producto -->
+        <div class="col-md-6">
+            @if (Model.EsOferta)
+            {
+                <span class="badge bg-danger fs-6 mb-2">¡OFERTA ESPECIAL!</span>
+            }
+            <h1 class="mb-3">@Model.Nombre</h1>
+            
+            <p class="text-muted">
+                <strong>Categoría:</strong> @Model.Categoria?.Nombre
+            </p>
+
+            <div class="mb-4">
+                @if (Model.PrecioAnterior.HasValue && Model.PrecioAnterior > Model.Precio)
+                {
+                    <div class="text-muted text-decoration-line-through fs-5">
+                        S/ @Model.PrecioAnterior.Value.ToString("N2")
+                    </div>
+                    <div class="text-success fs-2 fw-bold">
+                        S/ @Model.Precio.ToString("N2")
+                    </div>
+                    <div class="text-danger">
+                        Ahorra: S/ @((Model.PrecioAnterior.Value - Model.Precio).ToString("N2"))
+                    </div>
+                }
+                else
+                {
+                    <div class="text-success fs-2 fw-bold">
+                        S/ @Model.Precio.ToString("N2")
+                    </div>
+                }
+            </div>
+
+            <div class="mb-4">
+                <h5>Descripción:</h5>
+                <p>@(Model.Descripcion ?? "Sin descripción disponible.")</p>
+            </div>
+
+            <div class="mb-4">
+                @if (Model.Stock > 0)
+                {
+                    <div class="alert alert-success">
+                        <i class="bi bi-check-circle"></i> 
+                        <strong>Disponible:</strong> @Model.Stock unidades en stock
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-lg" onclick="agregarAlCarrito(@Model.ProductoId)">
+                            <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                        </button>
+                        <button class="btn btn-primary" onclick="comprarAhora(@Model.ProductoId)">
+                            Comprar Ahora
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        <strong>Producto agotado</strong>
+                    </div>
+                }
+            </div>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Volver al catálogo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function agregarAlCarrito(productoId) {
+            alert('Producto agregado al carrito (funcionalidad por implementar)');
+            // Aquí puedes implementar la lógica para agregar al carrito
+        }
+
+        function comprarAhora(productoId) {
+            alert('Redirigiendo a compra (funcionalidad por implementar)');
+            // Aquí puedes implementar la lógica de compra directa
+        }
+    </script>
+}
