@@ -118,7 +118,7 @@ namespace appUPN.Controllers
                 {
                     Nombre = model.Nombre,
                     Email = model.Email,
-                    PasswordHash = BCrypt.HashPassword(model.Password),
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),
                     Telefono = model.Telefono,
                     Direccion = model.Direccion,
                     Rol = "Cliente",

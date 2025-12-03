@@ -41,7 +41,7 @@ namespace appUPN.Repositories
                 return null;
 
             // Verificar password con BCrypt
-            if (BCrypt.Verify(password, user.PasswordHash))
+            if (BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
                 return user;
 
             return null;
