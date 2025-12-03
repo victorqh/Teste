@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using appUPN.Models;
 using appUPN.Repositories;
+using BCrypt.Net;
 
 namespace appUPN.Controllers
 {
@@ -117,7 +118,7 @@ namespace appUPN.Controllers
                 {
                     Nombre = model.Nombre,
                     Email = model.Email,
-                    PasswordHash = model.Password, // En producción, usar BCrypt.HashPassword
+                    PasswordHash = BCrypt.HashPassword(model.Password),
                     Telefono = model.Telefono,
                     Direccion = model.Direccion,
                     Rol = "Cliente",

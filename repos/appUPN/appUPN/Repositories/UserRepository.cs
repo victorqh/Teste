@@ -1,6 +1,7 @@
 using appUPN.Data;
 using appUPN.Models;
 using Microsoft.EntityFrameworkCore;
+using BCrypt.Net;
 
 namespace appUPN.Repositories
 {
@@ -39,8 +40,8 @@ namespace appUPN.Repositories
             if (user == null)
                 return null;
 
-            // Verificar password (simple para práctica - en producción usar BCrypt o similar)
-            if (user.PasswordHash == password)
+            // Verificar password con BCrypt
+            if (BCrypt.Verify(password, user.PasswordHash))
                 return user;
 
             return null;

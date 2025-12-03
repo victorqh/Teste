@@ -15,7 +15,9 @@ namespace appUPN.Models
 
         [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
-        [StringLength(100, MinimumLength = 6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "La contraseña debe tener entre 8 y 100 caracteres")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$", 
+            ErrorMessage = "La contraseña debe contener al menos una mayúscula, una minúscula y un número")]
         public string Password { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Confirma tu contraseña")]
