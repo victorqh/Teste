@@ -13,8 +13,9 @@ Debug/
 Release/
 
 ## ASP.NET / WWWROOT ##
-wwwroot/lib/
-wwwroot/node_modules/
+# Comentado para incluir librerías en Git
+# wwwroot/lib/
+# wwwroot/node_modules/
 
 ## NuGet ##
 *.nupkg

@@ -12,7 +12,6 @@ namespace appUPN.Services
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
         private readonly ILogger<ChatBotService> _logger;
-        private const string GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent";
 
         public ChatBotService(
             IHttpClientFactory httpClientFactory,
@@ -41,9 +40,12 @@ namespace appUPN.Services
                 _context.ChatMessages.Add(userMessage);
                 await _context.SaveChangesAsync();
 
+                // Obtener productos disponibles de la base de datos
+                var productosDisponibles = await ObtenerProductosDisponiblesAsync();
+
                 // Obtener historial para contexto
                 var historial = await ObtenerHistorialAsync(sessionId, 5);
-                var contexto = ConstruirContexto(historial, mensaje);
+                var contexto = await ConstruirContextoAsync(historial, mensaje, productosDisponibles);
 
                 // Llamar a la API de Gemini
                 var respuesta = await LlamarGeminiAsync(contexto);
@@ -68,29 +70,74 @@ namespace appUPN.Services
             }
         }
 
-        private string ConstruirContexto(IEnumerable<ChatMessage> historial, string mensajeActual)
+        private async Task<List<Producto>> ObtenerProductosDisponiblesAsync()
+        {
+            return await _context.Productos
+                .Include(p => p.Categoria)
+                .Where(p => p.EstaActivo)
+                .OrderBy(p => p.CategoriaId)
+                .ThenBy(p => p.Nombre)
+                .ToListAsync();
+        }
+
+        private async Task<string> ConstruirContextoAsync(IEnumerable<ChatMessage> historial, string mensajeActual, List<Producto> productos)
         {
             var sb = new StringBuilder();
             
             sb.AppendLine("Eres un asistente virtual para appUPN, una tienda online de tecnología en Perú.");
-            sb.AppendLine("Tu rol es ayudar a los clientes con información sobre productos y la tienda.");
+            sb.AppendLine("Tu rol es ayudar a los clientes con información sobre productos, stock, precios y la tienda.");
             sb.AppendLine("\nInformación de la tienda:");
-            sb.AppendLine("- Vendemos: Laptops, Smartphones, Tablets, Televisores, Electrodomésticos, Audio, Gaming y Accesorios");
             sb.AppendLine("- Precios en Soles peruanos (S/)");
             sb.AppendLine("- Envío gratis en todos los pedidos");
             sb.AppendLine("- Aceptamos pagos seguros online");
             sb.AppendLine("- Los usuarios deben registrarse para comprar");
-            sb.AppendLine("\nResponde de manera amigable, profesional y concisa.");
-            sb.AppendLine("Si te preguntan por productos específicos, recomienda buscar en nuestro catálogo.");
+            
+            sb.AppendLine("\n=== CATÁLOGO COMPLETO DE PRODUCTOS DISPONIBLES ===");
+            
+            var productosPorCategoria = productos.GroupBy(p => p.Categoria?.Nombre ?? "Sin categoría");
+            
+            foreach (var categoria in productosPorCategoria)
+            {
+                sb.AppendLine($"\n📦 {categoria.Key}:");
+                foreach (var producto in categoria)
+                {
+                    sb.AppendLine($"  • {producto.Nombre}");
+                    sb.AppendLine($"    - Precio: S/ {producto.Precio:N2}");
+                    if (producto.PrecioAnterior.HasValue && producto.PrecioAnterior > producto.Precio)
+                    {
+                        var descuento = ((producto.PrecioAnterior.Value - producto.Precio) / producto.PrecioAnterior.Value * 100);
+                        sb.AppendLine($"    - Precio anterior: S/ {producto.PrecioAnterior:N2} (¡{descuento:N0}% OFF!)");
+                    }
+                    sb.AppendLine($"    - Stock: {(producto.Stock > 0 ? $"{producto.Stock} unidades disponibles" : "AGOTADO")}");
+                    if (!string.IsNullOrEmpty(producto.Descripcion))
+                    {
+                        sb.AppendLine($"    - Descripción: {producto.Descripcion}");
+                    }
+                    if (producto.EsOferta)
+                    {
+                        sb.AppendLine($"    - ¡EN OFERTA! 🔥");
+                    }
+                }
+            }
+            
+            sb.AppendLine("\n=== FIN DEL CATÁLOGO ===");
+            sb.AppendLine("\nINSTRUCCIONES:");
+            sb.AppendLine("- Si preguntan por productos, usa la información exacta del catálogo (nombres, precios, stock)");
+            sb.AppendLine("- Si preguntan por disponibilidad, indica el stock exacto");
+            sb.AppendLine("- Si un producto está agotado (stock 0), informa que no hay disponibilidad");
+            sb.AppendLine("- Si preguntan por ofertas, menciona solo los productos que tienen 'EN OFERTA' o precio anterior");
+            sb.AppendLine("- Si preguntan por precios, proporciona el precio exacto");
+            sb.AppendLine("- Recomienda productos similares si el que buscan está agotado");
+            sb.AppendLine("- Sé amigable, profesional y conciso");
+            
             sb.AppendLine("\nConversación anterior:");
-
             foreach (var msg in historial.TakeLast(4))
             {
                 sb.AppendLine($"{msg.Role}: {msg.Message}");
             }
 
             sb.AppendLine($"\nPregunta actual del usuario: {mensajeActual}");
-            sb.AppendLine("\nTu respuesta:");
+            sb.AppendLine("\nTu respuesta (usa información real del catálogo):");
 
             return sb.ToString();
         }

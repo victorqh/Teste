@@ -1,9 +1,4 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-// Chatbot functionality
+﻿// Chatbot functionality
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('chatbot-toggle');
     const window = document.getElementById('chatbot-window');
@@ -11,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const input = document.getElementById('chatbot-input-field');
     const sendBtn = document.getElementById('chatbot-send');
     const messages = document.getElementById('chatbot-messages');
+    const messagesContainer = document.querySelector('.chatbot-messages-container');
     
     // Generar session ID único
     let sessionId = localStorage.getItem('chatSessionId');
@@ -80,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.className = `message ${type}-message`;
         messageDiv.textContent = text;
         messages.appendChild(messageDiv);
-        messages.scrollTop = messages.scrollHeight;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
     function showTypingIndicator() {
@@ -88,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         indicator.className = 'typing-indicator';
         indicator.innerHTML = '<span></span><span></span><span></span>';
         messages.appendChild(indicator);
-        messages.scrollTop = messages.scrollHeight;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
         return indicator;
     }
 });
