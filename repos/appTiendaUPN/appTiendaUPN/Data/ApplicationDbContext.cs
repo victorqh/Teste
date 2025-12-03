@@ -15,5 +15,6 @@ namespace appTiendaUPN.Data
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Carrito> Carritos { get; set; }
         public DbSet<CarritoItem> CarritoItems { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
     }
 }

@@ -56,6 +56,21 @@ CREATE TABLE carritoitems (
         REFERENCES productos(productoid)
 );
 
+-- 6. Tabla de Mensajes del Chat
+CREATE TABLE chatmessages (
+    chatmessageid SERIAL PRIMARY KEY,
+    userid INT,
+    sessionid VARCHAR(200) NOT NULL,
+    role VARCHAR(20) NOT NULL, -- 'user' o 'assistant'
+    message TEXT NOT NULL,
+    createdat TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_chatmessage_user FOREIGN KEY (userid) 
+        REFERENCES users(userid) ON DELETE SET NULL
+);
+
+CREATE INDEX idx_chatmessages_session ON chatmessages(sessionid);
+CREATE INDEX idx_chatmessages_user ON chatmessages(userid);
+
 CREATE INDEX idx_productos_categoria ON productos(categoriaid);
 CREATE INDEX idx_productos_activo ON productos(estaactivo);
 CREATE INDEX idx_carritos_user ON carritos(userid);

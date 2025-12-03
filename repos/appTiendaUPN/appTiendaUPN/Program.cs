@@ -21,6 +21,10 @@ builder.Services.AddScoped<ICarritoRepository, CarritoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 builder.Services.AddScoped<ICarritoService, CarritoService>();
 builder.Services.AddScoped<RecomendacionService>();
+builder.Services.AddScoped<IChatService, ChatService>();
+
+// Agregar HttpClient para Gemini API
+builder.Services.AddHttpClient();
 
 // Configurar Cookie Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
