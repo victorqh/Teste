@@ -121,7 +121,7 @@ namespace appUPN.Controllers
                     Telefono = model.Telefono,
                     Direccion = model.Direccion,
                     Rol = "Cliente",
-                    FechaRegistro = DateTime.Now
+                    FechaRegistro = DateTime.UtcNow
                 };
 
                 await _userRepository.CrearUsuarioAsync(user);

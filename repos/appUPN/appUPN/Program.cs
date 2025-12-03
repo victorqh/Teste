@@ -2,11 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using appUPN.Data;
 using appUPN.Repositories;
+using appUPN.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Agregar HttpClient para llamadas a APIs externas
+builder.Services.AddHttpClient();
 
 // Configurar PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -26,6 +30,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 // Registrar Repositories (Inyección de Dependencias)
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICarritoRepository, CarritoRepository>();
+
+// Registrar Servicios
+builder.Services.AddScoped<IChatBotService, ChatBotService>();
 
 var app = builder.Build();
 

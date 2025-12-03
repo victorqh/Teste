@@ -12,6 +12,9 @@ namespace appUPN.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Carrito> Carritos { get; set; }
+        public DbSet<CarritoItem> CarritoItems { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

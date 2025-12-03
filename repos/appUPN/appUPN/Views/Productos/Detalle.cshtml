@@ -67,14 +67,34 @@
                         <strong>Disponible:</strong> @Model.Stock unidades en stock
                     </div>
 
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-success btn-lg" onclick="agregarAlCarrito(@Model.ProductoId)">
-                            <i class="bi bi-cart-plus"></i> Agregar al Carrito
-                        </button>
-                        <button class="btn btn-primary" onclick="comprarAhora(@Model.ProductoId)">
-                            Comprar Ahora
-                        </button>
-                    </div>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <form asp-controller="Carrito" asp-action="Agregar" method="post">
+                            <input type="hidden" name="productoId" value="@Model.ProductoId" />
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Cantidad:</span>
+                                <input type="number" name="cantidad" value="1" min="1" max="@Model.Stock" class="form-control">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    🛒 Agregar al Carrito
+                                </button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <strong>Inicia sesión</strong> para agregar productos al carrito
+                        </div>
+                        <div class="d-grid gap-2">
+                            <a asp-controller="Account" asp-action="Login" 
+                               asp-route-returnUrl="@Url.Action("Detalle", "Productos", new { id = Model.ProductoId })"
+                               class="btn btn-primary btn-lg">
+                                Iniciar Sesión
+                            </a>
+                        </div>
+                    }
                 }
                 else
                 {
@@ -92,17 +112,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        function agregarAlCarrito(productoId) {
-            alert('Producto agregado al carrito (funcionalidad por implementar)');
-            // Aquí puedes implementar la lógica para agregar al carrito
-        }
-
-        function comprarAhora(productoId) {
-            alert('Redirigiendo a compra (funcionalidad por implementar)');
-            // Aquí puedes implementar la lógica de compra directa
-        }
-    </script>
-}

@@ -40,6 +40,6 @@ namespace appUPN.Models
         public string Rol { get; set; } = "Cliente";
 
         [Column("fecharegistro")]
-        public DateTime FechaRegistro { get; set; } = DateTime.Now;
+        public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
     }
 }
