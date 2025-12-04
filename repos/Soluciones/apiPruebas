@@ -1,4 +1,7 @@
+# Registro de Usuario
 POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
 {
   "nombre": "Test01",
   "email": "test01@test.com",
@@ -8,7 +11,7 @@ POST http://localhost:8080/api/users/register
   "rol": "Cliente"
 }
 
-salio
+# Respuesta:
 {
     "userId": 1,
     "nombre": "Test01",
@@ -19,14 +22,15 @@ salio
     "fechaRegistro": "2025-11-23T23:41:52.184477"
 }
 
-
+### Login
 POST http://localhost:8080/api/auth/login
+
 {
   "email": "test01@test.com",
   "password": "123456"
 }
 
-SALIO
+# Respuesta
 {
     "token": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0MDFAdGVzdC5jb20iLCJ1c2VySWQiOjEsInJvbCI6IkNsaWVudGUiLCJpYXQiOjE3NjM5NTk0NDYsImV4cCI6MTc2NDA0NTg0Nn0.-y33lZu67gC6U8cIqCqkuraocCJrs7HH5H_Dgfk7b_eS0pdOPg7VCc_e9bWIEvpt",
     "user": {
@@ -37,13 +41,233 @@ SALIO
     }
 }
 
+### Listar Todos los Usuarios (Requiere Auth)
 GET http://localhost:8080/api/users
+Authorization: Bearer {token}
 
-./mvnw clean install -DskipTests
+### Obtener Usuario por ID
+GET http://localhost:8080/api/users/1
+Authorization: Bearer {token}
+
+### Actualizar Usuario
+PUT http://localhost:8080/api/users/1
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "nombre": "Test01 Actualizado",
+  "email": "test01@test.com",
+  "password": "123456",
+  "telefono": "0987654321",
+  "direccion": "Nueva Dirección 456",
+  "rol": "Cliente"
+}
+
+### Eliminar Usuario
+DELETE http://localhost:8080/api/users/1
+Authorization: Bearer {token}
 
 
-java -jar "$env:USERPROFILE\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar"
+### Listar Todas las Categorías
+GET http://localhost:8080/api/categorias
+
+# Respuesta:
+[
+    {
+        "categoriaId": 1,
+        "nombre": "Laptops",
+        "descripcion": "Laptops y computadoras portátiles"
+    },
+    {
+        "categoriaId": 2,
+        "nombre": "Smartphones",
+        "descripcion": "Teléfonos inteligentes"
+    }
+]
+
+### Obtener Categoría por ID
+GET http://localhost:8080/api/categorias/1
+
+# Respuesta:
+{
+    "categoriaId": 1,
+    "nombre": "Laptops",
+    "descripcion": "Laptops y computadoras portátiles"
+}
 
 
-cd appFinal_Front
-ng serve
+## ===========================
+## 4. PRODUCTOS (Público)
+## ===========================
+
+### Listar Todos los Productos
+GET http://localhost:8080/api/productos
+
+# Respuesta:
+[
+    {
+        "productoId": 1,
+        "nombre": "Laptop HP 15",
+        "descripcion": "Laptop potente para trabajo",
+        "precio": 3500.00,
+        "precioAnterior": 4000.00,
+        "stock": 10,
+        "imagenUrl": "https://example.com/laptop.jpg",
+        "activo": true,
+        "enOferta": true,
+        "categoria": {
+            "categoriaId": 1,
+            "nombre": "Laptops"
+        }
+    }
+]
+
+### Obtener Producto por ID
+GET http://localhost:8080/api/productos/1
+
+# Respuesta:
+{
+    "productoId": 1,
+    "nombre": "Laptop HP 15",
+    "descripcion": "Laptop potente para trabajo",
+    "precio": 3500.00,
+    "precioAnterior": 4000.00,
+    "stock": 10,
+    "imagenUrl": "https://example.com/laptop.jpg",
+    "activo": true,
+    "enOferta": true,
+    "categoria": {
+        "categoriaId": 1,
+        "nombre": "Laptops"
+    }
+}
+
+### Listar Productos por Categoría
+GET http://localhost:8080/api/productos/categoria/1
+
+### Listar Productos en Oferta
+GET http://localhost:8080/api/productos/ofertas
+
+### Buscar Productos
+GET http://localhost:8080/api/productos/buscar?q=laptop
+
+### Crear Producto (Admin)
+POST http://localhost:8080/api/productos
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "nombre": "Mouse Logitech G502",
+    "descripcion": "Mouse gaming de alta precisión",
+    "precio": 450.00,
+    "precioAnterior": 550.00,
+    "stock": 25,
+    "imagenUrl": "https://example.com/mouse.jpg",
+    "activo": true,
+    "enOferta": true,
+    "categoriaId": 3
+}
+
+### Actualizar Producto (Admin)
+PUT http://localhost:8080/api/productos/1
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "nombre": "Laptop HP 15 - Actualizada",
+    "descripcion": "Laptop potente con SSD",
+    "precio": 3200.00,
+    "precioAnterior": 4000.00,
+    "stock": 8,
+    "imagenUrl": "https://example.com/laptop-new.jpg",
+    "activo": true,
+    "enOferta": true,
+    "categoriaId": 1
+}
+
+### Eliminar Producto (Admin)
+DELETE http://localhost:8080/api/productos/1
+Authorization: Bearer {token}
+
+
+## ===========================
+## 5. CARRITO (Requiere Auth)
+## ===========================
+
+### Ver Mi Carrito
+GET http://localhost:8080/api/carrito
+Authorization: Bearer {token}
+
+# Respuesta:
+{
+    "carritoId": 1,
+    "items": [
+        {
+            "carritoItemId": 1,
+            "producto": {
+                "productoId": 1,
+                "nombre": "Laptop HP 15",
+                "precio": 3500.00,
+                "imagenUrl": "https://example.com/laptop.jpg"
+            },
+            "cantidad": 2,
+            "subtotal": 7000.00
+        }
+    ],
+    "total": 7000.00
+}
+
+### Agregar Producto al Carrito
+POST http://localhost:8080/api/carrito/agregar
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "productoId": 1,
+    "cantidad": 2
+}
+
+# Respuesta: Carrito actualizado (mismo formato que GET)
+
+### Actualizar Cantidad de Item
+PUT http://localhost:8080/api/carrito/item/1?cantidad=3
+Authorization: Bearer {token}
+
+# Respuesta: Carrito actualizado
+
+### Eliminar Item del Carrito
+DELETE http://localhost:8080/api/carrito/item/1
+Authorization: Bearer {token}
+
+# Respuesta: 204 No Content
+
+### Vaciar Carrito Completo
+DELETE http://localhost:8080/api/carrito/vaciar
+Authorization: Bearer {token}
+
+# Respuesta: 204 No Content
+
+
+## ===========================
+
+
+1. Todas las rutas que requieren autenticación deben incluir:
+   Authorization: Bearer {token}
+
+2. El token se obtiene al hacer login y expira en 24 horas
+
+3. Rutas públicas (sin token):
+   - POST /api/auth/login
+   - POST /api/users/register
+   - GET /api/categorias/**
+   - GET /api/productos/**
+
+4. Rutas protegidas (requieren token):
+   - GET /api/carrito/**
+   - POST /api/carrito/**
+   - PUT /api/carrito/**
+   - DELETE /api/carrito/**
+   - GET /api/users
+   - POST /api/productos (Admin)
+   - PUT /api/productos (Admin)
+   - DELETE /api/productos (Admin)
