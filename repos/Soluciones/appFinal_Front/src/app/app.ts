@@ -11,10 +11,11 @@ import { CarritoService } from './services/carrito.service';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  protected readonly title = signal('TechShop');
+  protected readonly title = signal('UPNSTORE');
   estaAutenticado = signal<boolean>(false);
   nombreUsuario = signal<string>('');
   cantidadCarrito = signal<number>(0);
+  isAdmin = signal<boolean>(false);
 
   constructor(
     private authService: AuthService,
@@ -25,6 +26,7 @@ export class App implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       this.estaAutenticado.set(!!user);
       this.nombreUsuario.set(user?.nombre || '');
+      this.isAdmin.set(user?.rol === 'admin');
       
       if (user) {
         this.carritoService.getCarrito().subscribe();

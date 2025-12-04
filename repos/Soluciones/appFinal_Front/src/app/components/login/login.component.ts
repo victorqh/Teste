@@ -30,11 +30,16 @@ export class LoginComponent {
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
         this.loading.set(false);
-        this.router.navigate(['/dashboard']);
+        // Redirigir según el rol del usuario
+        if (response.user.rol === 'admin') {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       error: (error) => {
         this.loading.set(false);
-        this.errorMessage.set('Credenciales inv�lidas. Por favor, intenta de nuevo.');
+        this.errorMessage.set('Credenciales inválidas. Por favor, intenta de nuevo.');
         console.error('Login error:', error);
       }
     });

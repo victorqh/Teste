@@ -7,28 +7,22 @@
 .loading, .error {
   text-align: center;
   padding: 50px;
-  font-size: 1.2rem;
 }
 
 .detalle-content {
   background: white;
-  border-radius: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   padding: 30px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .btn-volver {
   padding: 10px 20px;
   background: #f0f0f0;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
-  transition: background 0.3s;
-}
-
-.btn-volver:hover {
-  background: #e0e0e0;
 }
 
 .producto-detalle {
@@ -44,30 +38,28 @@
 
 .imagen-section img {
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .badge-oferta {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: #ff6b6b;
+  background: var(--primary);
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 4px;
   font-weight: bold;
-  font-size: 1.1rem;
 }
 
 .info-section h1 {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #333;
 }
 
 .categoria {
-  color: #667eea;
+  color: var(--primary);
   font-size: 1.1rem;
   margin-bottom: 20px;
 }
@@ -86,39 +78,39 @@
 }
 
 .descuento {
-  background: #ff6b6b;
+  background: var(--primary);
   color: white;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 4px;
   font-weight: bold;
 }
 
 .precio {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #667eea;
+  color: var(--primary);
 }
 
 .descripcion {
   color: #666;
   line-height: 1.6;
   margin: 20px 0;
-  font-size: 1.1rem;
 }
 
 .stock-info {
   margin: 20px 0;
   padding: 15px;
-  border-radius: 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   font-weight: 500;
 }
 
 .stock-disponible {
-  color: #4caf50;
+  color: var(--primary);
 }
 
 .stock-agotado {
-  color: #f44336;
+  color: var(--dark);
 }
 
 .cantidad-selector {
@@ -140,18 +132,12 @@
 .cantidad-controls button {
   width: 40px;
   height: 40px;
-  border: 1px solid #667eea;
+  border: 1px solid var(--primary);
   background: white;
-  color: #667eea;
+  color: var(--primary);
   font-size: 1.5rem;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s;
-}
-
-.cantidad-controls button:hover:not(:disabled) {
-  background: #667eea;
-  color: white;
 }
 
 .cantidad-controls button:disabled {
@@ -169,18 +155,13 @@
 .btn-agregar {
   width: 100%;
   padding: 15px;
-  background: #667eea;
+  background: var(--primary);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-agregar:hover:not(:disabled) {
-  background: #764ba2;
 }
 
 .btn-agregar:disabled {

@@ -51,6 +51,45 @@ public class ProductoService {
                 .collect(Collectors.toList());
     }
     
+    public ProductoDTO createProducto(ProductoDTO productoDTO) {
+        Producto producto = new Producto();
+        producto.setNombre(productoDTO.getNombre());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setStock(productoDTO.getStock());
+        producto.setImagenUrl(productoDTO.getImagenUrl());
+        producto.setCategoriaId(productoDTO.getCategoriaId());
+        producto.setEstaActivo(productoDTO.getEstaActivo());
+        producto.setEsOferta(productoDTO.getEsOferta());
+        
+        Producto savedProducto = productoRepository.save(producto);
+        return convertToDTO(savedProducto);
+    }
+    
+    public ProductoDTO updateProducto(Integer id, ProductoDTO productoDTO) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        producto.setNombre(productoDTO.getNombre());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setStock(productoDTO.getStock());
+        producto.setImagenUrl(productoDTO.getImagenUrl());
+        producto.setCategoriaId(productoDTO.getCategoriaId());
+        producto.setEstaActivo(productoDTO.getEstaActivo());
+        producto.setEsOferta(productoDTO.getEsOferta());
+        
+        Producto updatedProducto = productoRepository.save(producto);
+        return convertToDTO(updatedProducto);
+    }
+    
+    public void deleteProducto(Integer id) {
+        if (!productoRepository.existsById(id)) {
+            throw new RuntimeException("Producto no encontrado");
+        }
+        productoRepository.deleteById(id);
+    }
+    
     private ProductoDTO convertToDTO(Producto producto) {
         return new ProductoDTO(
                 producto.getProductoId(),

@@ -31,6 +31,21 @@ export class DashboardComponent implements OnInit {
   productosEnOferta = signal(0);
   productosBajoStock = signal(0);
 
+  // Para el formulario
+  mostrandoFormulario = signal(false);
+  editandoProducto = signal(false);
+  productoForm: any = {
+    productoId: null,
+    nombre: '',
+    descripcion: '',
+    precio: 0,
+    stock: 0,
+    categoriaId: '',
+    imagenUrl: '',
+    esOferta: false,
+    estaActivo: true
+  };
+
   ngOnInit(): void {
     this.authService.loadCurrentUser();
     const user = this.currentUser();
@@ -85,5 +100,98 @@ export class DashboardComponent implements OnInit {
       month: 'short',
       day: 'numeric'
     });
+  }
+
+  mostrarFormulario(): void {
+    this.resetFormulario();
+    this.editandoProducto.set(false);
+    this.mostrandoFormulario.set(true);
+  }
+
+  cancelarFormulario(): void {
+    this.mostrandoFormulario.set(false);
+    this.resetFormulario();
+  }
+
+  resetFormulario(): void {
+    this.productoForm = {
+      productoId: null,
+      nombre: '',
+      descripcion: '',
+      precio: 0,
+      stock: 0,
+      categoriaId: '',
+      imagenUrl: '',
+      esOferta: false,
+      estaActivo: true
+    };
+  }
+
+  editarProducto(producto: Producto): void {
+    this.productoForm = {
+      productoId: producto.productoId,
+      nombre: producto.nombre,
+      descripcion: producto.descripcion,
+      precio: producto.precio,
+      stock: producto.stock,
+      categoriaId: producto.categoriaId,
+      imagenUrl: producto.imagenUrl,
+      esOferta: producto.esOferta,
+      estaActivo: producto.estaActivo
+    };
+    this.editandoProducto.set(true);
+    this.mostrandoFormulario.set(true);
+  }
+
+  guardarProducto(event: Event): void {
+    event.preventDefault();
+    
+    const productoData = {
+      ...this.productoForm,
+      categoriaId: Number(this.productoForm.categoriaId),
+      precio: Number(this.productoForm.precio),
+      stock: Number(this.productoForm.stock)
+    };
+
+    if (this.editandoProducto()) {
+      this.productoService.updateProducto(productoData.productoId, productoData).subscribe({
+        next: () => {
+          alert('Producto actualizado exitosamente');
+          this.cargarDatos();
+          this.cancelarFormulario();
+        },
+        error: (error) => {
+          console.error('Error actualizando producto:', error);
+          alert('Error al actualizar el producto');
+        }
+      });
+    } else {
+      this.productoService.createProducto(productoData).subscribe({
+        next: () => {
+          alert('Producto creado exitosamente');
+          this.cargarDatos();
+          this.cancelarFormulario();
+        },
+        error: (error) => {
+          console.error('Error creando producto:', error);
+          alert('Error al crear el producto');
+        }
+      });
+    }
+  }
+
+  eliminarProducto(productoId: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+      this.productoService.deleteProducto(productoId).subscribe({
+        next: () => {
+          alert('Producto eliminado exitosamente');
+          this.cargarDatos();
+        },
+        error: (error) => {
+          console.error('Error eliminando producto:', error);
+          alert('Error al eliminar el producto');
+        }
+      });
+    }
   }
 }

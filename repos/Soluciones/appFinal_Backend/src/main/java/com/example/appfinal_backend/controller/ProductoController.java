@@ -17,7 +17,7 @@ public class ProductoController {
     
     @GetMapping
     public ResponseEntity<List<ProductoDTO>> getAllProductos() {
-        List<ProductoDTO> productos = productoService.getProductosActivos();
+        List<ProductoDTO> productos = productoService.getAllProductos();
         return ResponseEntity.ok(productos);
     }
     
@@ -47,5 +47,35 @@ public class ProductoController {
     public ResponseEntity<List<ProductoDTO>> buscarProductos(@RequestParam String q) {
         List<ProductoDTO> productos = productoService.buscarProductos(q);
         return ResponseEntity.ok(productos);
+    }
+    
+    @PostMapping
+    public ResponseEntity<ProductoDTO> createProducto(@RequestBody ProductoDTO productoDTO) {
+        try {
+            ProductoDTO nuevoProducto = productoService.createProducto(productoDTO);
+            return ResponseEntity.ok(nuevoProducto);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductoDTO> updateProducto(@PathVariable Integer id, @RequestBody ProductoDTO productoDTO) {
+        try {
+            ProductoDTO productoActualizado = productoService.updateProducto(id, productoDTO);
+            return ResponseEntity.ok(productoActualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProducto(@PathVariable Integer id) {
+        try {
+            productoService.deleteProducto(id);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

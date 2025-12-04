@@ -7,20 +7,19 @@
 .dashboard-header {
   background: white;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   margin-bottom: 30px;
 }
 
 .dashboard-header h1 {
   font-size: 2rem;
-  color: #333;
+  color: var(--dark);
   margin-bottom: 10px;
 }
 
 .dashboard-header p {
-  color: #667eea;
-  font-size: 1.1rem;
+  color: var(--primary);
 }
 
 .stats-grid {
@@ -33,13 +32,13 @@
 .stat-card {
   background: white;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   text-align: center;
 }
 
 .stat-card.warning {
-  border-left: 5px solid #ff6b6b;
+  border-left: 3px solid var(--primary);
 }
 
 .stat-card h3 {
@@ -51,34 +50,34 @@
 .stat-number {
   font-size: 3rem;
   font-weight: bold;
-  color: #667eea;
+  color: var(--primary);
 }
 
 .productos-admin, .categorias-admin {
   background: white;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   margin-bottom: 30px;
 }
 
 .productos-admin h2, .categorias-admin h2 {
   font-size: 1.5rem;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--dark);
 }
 
 .loading {
   text-align: center;
   padding: 50px;
-  font-size: 1.2rem;
 }
 
 .error-message {
-  background: #ffebee;
-  color: #c62828;
+  background: var(--yellow);
+  color: var(--dark);
   padding: 15px;
-  border-radius: 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   margin-bottom: 20px;
 }
 
@@ -99,13 +98,12 @@ th {
   padding: 15px;
   text-align: left;
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid var(--border);
 }
 
 td {
   padding: 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border);
 }
 
 tr.bajo-stock {
@@ -116,33 +114,33 @@ tr.bajo-stock {
   width: 50px;
   height: 50px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .stock-bajo {
-  color: #ff6b6b;
+  color: var(--primary);
   font-weight: bold;
 }
 
 .badge {
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 500;
 }
 
 .badge.activo {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: var(--accent);
+  color: var(--dark);
 }
 
 .badge.inactivo {
-  background: #ffebee;
-  color: #c62828;
+  background: var(--yellow);
+  color: var(--dark);
 }
 
 .badge.oferta {
-  background: #ff6b6b;
+  background: var(--primary);
   color: white;
 }
 
@@ -160,14 +158,131 @@ tr.bajo-stock {
 .categoria-item {
   background: #f5f5f5;
   padding: 20px;
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
 .categoria-item h3 {
-  color: #667eea;
+  color: var(--primary);
   margin-bottom: 10px;
 }
 
 .categoria-item p {
   color: #666;
+}
+
+/* Estilos para el formulario */
+.productos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-crear {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-container {
+  background: #f5f5f5;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.form-container h3 {
+  color: var(--dark);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 30px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn-guardar,
+.btn-cancelar {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-guardar {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-cancelar {
+  background: #e0e0e0;
+  color: var(--dark);
+}
+
+/* Botones de acción en la tabla */
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-editar,
+.btn-eliminar {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-editar {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-eliminar {
+  background: var(--dark);
+  color: white;
 }

@@ -7,21 +7,20 @@
 .carrito-container h1 {
   font-size: 2rem;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--dark);
 }
 
 .loading {
   text-align: center;
   padding: 50px;
-  font-size: 1.2rem;
 }
 
 .carrito-vacio {
   text-align: center;
   padding: 100px 20px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .carrito-vacio p {
@@ -49,15 +48,15 @@
   align-items: center;
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .carrito-item img {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .item-info h3 {
@@ -80,18 +79,12 @@
 .cantidad-controls button {
   width: 30px;
   height: 30px;
-  border: 1px solid #667eea;
+  border: 1px solid var(--primary);
   background: white;
-  color: #667eea;
+  color: var(--primary);
   font-size: 1.2rem;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s;
-}
-
-.cantidad-controls button:hover {
-  background: #667eea;
-  color: white;
 }
 
 .cantidad-controls span {
@@ -108,7 +101,7 @@
 .subtotal {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #667eea;
+  color: var(--primary);
 }
 
 .btn-eliminar {
@@ -116,18 +109,14 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.btn-eliminar:hover {
-  transform: scale(1.2);
+  color: #999;
 }
 
 .resumen-section {
   background: white;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   height: fit-content;
   position: sticky;
   top: 20px;
@@ -136,12 +125,11 @@
 .resumen-section h2 {
   font-size: 1.5rem;
   margin-bottom: 20px;
-  color: #333;
 }
 
 .resumen-detalle {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   padding: 20px 0;
   margin-bottom: 20px;
 }
@@ -150,13 +138,12 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
-  font-size: 1rem;
 }
 
 .resumen-item.total {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #667eea;
+  color: var(--primary);
   margin-top: 20px;
 }
 
@@ -167,41 +154,29 @@
   width: 100%;
   padding: 12px;
   text-align: center;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
   margin-bottom: 10px;
   text-decoration: none;
-  transition: all 0.3s;
 }
 
 .btn-comprar {
-  background: #667eea;
+  background: var(--primary);
   color: white;
   font-weight: bold;
-}
-
-.btn-comprar:hover {
-  background: #764ba2;
+  border-color: var(--primary);
 }
 
 .btn-vaciar {
-  background: #ff6b6b;
-  color: white;
-}
-
-.btn-vaciar:hover {
-  background: #ff5252;
+  background: var(--light);
+  color: var(--dark);
 }
 
 .btn-seguir {
-  background: #f0f0f0;
-  color: #333;
-}
-
-.btn-seguir:hover {
-  background: #e0e0e0;
+  background: white;
+  color: var(--dark);
 }
 
 @media (max-width: 768px) {

@@ -12,7 +12,6 @@ import { Producto, Categoria } from '../../models/user.model';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
-  productosDestacados = signal<Producto[]>([]);
   productosEnOferta = signal<Producto[]>([]);
   categorias = signal<Categoria[]>([]);
   cargando = signal<boolean>(true);
@@ -29,16 +28,9 @@ export class Home implements OnInit {
   cargarDatos(): void {
     this.cargando.set(true);
 
-    this.productoService.getAllProductos().subscribe({
-      next: (productos) => {
-        this.productosDestacados.set(productos.slice(0, 8));
-      },
-      error: (error) => console.error('Error cargando productos:', error)
-    });
-
     this.productoService.getProductosEnOferta().subscribe({
       next: (ofertas) => {
-        this.productosEnOferta.set(ofertas.slice(0, 4));
+        this.productosEnOferta.set(ofertas.slice(0, 6));
       },
       error: (error) => console.error('Error cargando ofertas:', error)
     });

@@ -27,10 +27,66 @@
     </div>
 
     <div class="productos-admin">
-      <h2>Gestión de Productos</h2>
+      <div class="productos-header">
+        <h2>Gestión de Productos</h2>
+        <button class="btn-crear" (click)="mostrarFormulario()">+ Crear Producto</button>
+      </div>
       
       @if (errorMessage()) {
         <div class="error-message">{{ errorMessage() }}</div>
+      }
+
+      @if (mostrandoFormulario()) {
+        <div class="form-container">
+          <h3>{{ editandoProducto() ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
+          <form (submit)="guardarProducto($event)">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" [(ngModel)]="productoForm.nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea [(ngModel)]="productoForm.descripcion" name="descripcion" required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Precio</label>
+                <input type="number" [(ngModel)]="productoForm.precio" name="precio" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label>Stock</label>
+                <input type="number" [(ngModel)]="productoForm.stock" name="stock" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Categoría</label>
+              <select [(ngModel)]="productoForm.categoriaId" name="categoriaId" required>
+                <option value="">Seleccionar categoría</option>
+                @for (cat of categorias(); track cat.categoriaId) {
+                  <option [value]="cat.categoriaId">{{ cat.nombre }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-group">
+              <label>URL de Imagen</label>
+              <input type="text" [(ngModel)]="productoForm.imagenUrl" name="imagenUrl" required>
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" [(ngModel)]="productoForm.esOferta" name="esOferta">
+                Es Oferta
+              </label>
+              <label>
+                <input type="checkbox" [(ngModel)]="productoForm.estaActivo" name="estaActivo">
+                Activo
+              </label>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-guardar">{{ editandoProducto() ? 'Actualizar' : 'Crear' }}</button>
+              <button type="button" class="btn-cancelar" (click)="cancelarFormulario()">Cancelar</button>
+            </div>
+          </form>
+        </div>
       }
 
       <div class="table-container">
@@ -38,30 +94,22 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Imagen</th>
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
               <th>Stock</th>
-              <th>Estado</th>
               <th>Oferta</th>
-              <th>Fecha</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             @for (producto of productos(); track producto.productoId) {
               <tr [class.bajo-stock]="producto.stock < 10">
                 <td>{{ producto.productoId }}</td>
-                <td><img [src]="producto.imagenUrl" [alt]="producto.nombre" class="mini-img"></td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ getCategoriaName(producto.categoriaId) }}</td>
                 <td>${{ producto.precio }}</td>
                 <td><span [class.stock-bajo]="producto.stock < 10">{{ producto.stock }}</span></td>
-                <td>
-                  <span class="badge" [class.activo]="producto.estaActivo" [class.inactivo]="!producto.estaActivo">
-                    {{ producto.estaActivo ? 'Activo' : 'Inactivo' }}
-                  </span>
-                </td>
                 <td>
                   @if (producto.esOferta) {
                     <span class="badge oferta">OFERTA</span>
@@ -69,23 +117,14 @@
                     <span class="badge normal">Normal</span>
                   }
                 </td>
-                <td>{{ formatDate(producto.fechaCreacion) }}</td>
+                <td class="acciones">
+                  <button class="btn-editar" (click)="editarProducto(producto)">Editar</button>
+                  <button class="btn-eliminar" (click)="eliminarProducto(producto.productoId)">Eliminar</button>
+                </td>
               </tr>
             }
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <div class="categorias-admin">
-      <h2>Categorías</h2>
-      <div class="categorias-list">
-        @for (categoria of categorias(); track categoria.categoriaId) {
-          <div class="categoria-item">
-            <h3>{{ categoria.nombre }}</h3>
-            <p>{{ categoria.descripcion }}</p>
-          </div>
-        }
       </div>
     </div>
   }

@@ -30,4 +30,16 @@ export class ProductoService {
   buscarProductos(query: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.apiUrl}/buscar?q=${query}`);
   }
+
+  createProducto(producto: Partial<Producto>): Observable<Producto> {
+    return this.http.post<Producto>(this.apiUrl, producto);
+  }
+
+  updateProducto(id: number, producto: Partial<Producto>): Observable<Producto> {
+    return this.http.put<Producto>(`${this.apiUrl}/${id}`, producto);
+  }
+
+  deleteProducto(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

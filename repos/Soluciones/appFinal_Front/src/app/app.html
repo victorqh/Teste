@@ -13,7 +13,9 @@
             <span class="badge">{{ cantidadCarrito() }}</span>
           }
         </a>
-        <a routerLink="/dashboard" class="nav-link">Dashboard</a>
+        @if (isAdmin()) {
+          <a routerLink="/dashboard" class="nav-link">Administración</a>
+        }
         <span class="user-name">{{ nombreUsuario() }}</span>
         <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
       } @else {
@@ -29,5 +31,5 @@
 </main>
 
 <footer class="footer">
-  <p>© 2024 TechShop - Todos los derechos reservados</p>
+  <p>© 2024 UPNSTORE - Todos los derechos reservados</p>
 </footer>
