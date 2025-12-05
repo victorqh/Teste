@@ -48,6 +48,14 @@
               <label>Descripción</label>
               <textarea [(ngModel)]="productoForm.descripcion" name="descripcion" required></textarea>
             </div>
+
+
+            <div class="form-group">
+              <label>Mensaje</label>
+              <input type="text" [(ngModel)]="productoForm.mensaje" name="mensaje" placeholder="Mensaje personalizado">
+            </div>
+
+            
             <div class="form-row">
               <div class="form-group">
                 <label>Precio</label>
@@ -96,6 +104,7 @@
               <th>ID</th>
               <th>Nombre</th>
               <th>Categoría</th>
+              <th>Mensaje</th>
               <th>Precio</th>
               <th>Stock</th>
               <th>Oferta</th>
@@ -108,6 +117,7 @@
                 <td>{{ producto.productoId }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ getCategoriaName(producto.categoriaId) }}</td>
+                <td>{{ producto.mensaje || '-' }}</td>
                 <td>${{ producto.precio }}</td>
                 <td><span [class.stock-bajo]="producto.stock < 10">{{ producto.stock }}</span></td>
                 <td>

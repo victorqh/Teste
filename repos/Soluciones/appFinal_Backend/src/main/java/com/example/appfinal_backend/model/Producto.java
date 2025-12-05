@@ -55,4 +55,8 @@ public class Producto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoriaid", insertable = false, updatable = false)
     private Categoria categoria;
+
+
+    @Column(name = "mensaje", columnDefinition = "TEXT")
+    private String mensaje;
 }

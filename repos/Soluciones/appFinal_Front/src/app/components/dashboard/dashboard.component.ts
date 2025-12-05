@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
   productoForm: any = {
     productoId: null,
     nombre: '',
+    mensaje: '',
     descripcion: '',
     precio: 0,
     stock: 0,
@@ -117,6 +118,7 @@ export class DashboardComponent implements OnInit {
     this.productoForm = {
       productoId: null,
       nombre: '',
+      mensaje: '',
       descripcion: '',
       precio: 0,
       stock: 0,
@@ -131,6 +133,7 @@ export class DashboardComponent implements OnInit {
     this.productoForm = {
       productoId: producto.productoId,
       nombre: producto.nombre,
+      mensaje: producto.mensaje,
       descripcion: producto.descripcion,
       precio: producto.precio,
       stock: producto.stock,

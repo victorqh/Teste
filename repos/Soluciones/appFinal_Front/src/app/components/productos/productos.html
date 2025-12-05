@@ -46,6 +46,9 @@
           <img [src]="producto.imagenUrl" [alt]="producto.nombre">
           <h3>{{ producto.nombre }}</h3>
           <p class="descripcion">{{ producto.descripcion }}</p>
+
+          <h3>{{ producto.mensaje }}</h3>
+          
           <div class="precio-stock">
             <div class="precio-container">
               @if (producto.precioAnterior) {

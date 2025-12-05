@@ -23,4 +23,5 @@ public class ProductoDTO {
     private Boolean estaActivo;
     private Boolean esOferta;
     private LocalDateTime fechaCreacion;
+    private String mensaje;
 }

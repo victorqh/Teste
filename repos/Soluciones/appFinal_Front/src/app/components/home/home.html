@@ -31,6 +31,9 @@
               <img [src]="producto.imagenUrl" [alt]="producto.nombre">
               <h3>{{ producto.nombre }}</h3>
               <p>{{ producto.descripcion }}</p>
+              
+              <h3>{{ producto.mensaje }}</h3>
+              
               <div class="precio-container">
                 @if (producto.precioAnterior) {
                   <span class="precio-anterior">${{ producto.precioAnterior }}</span>

@@ -61,9 +61,10 @@ public class ProductoService {
         producto.setCategoriaId(productoDTO.getCategoriaId());
         producto.setEstaActivo(productoDTO.getEstaActivo());
         producto.setEsOferta(productoDTO.getEsOferta());
+        producto.setMensaje(productoDTO.getMensaje() != null ? productoDTO.getMensaje() : "HOLA SOY YO");
         
-        Producto savedProducto = productoRepository.save(producto);
-        return convertToDTO(savedProducto);
+        Producto updatedProducto = productoRepository.save(producto);
+        return convertToDTO(updatedProducto);
     }
     
     public ProductoDTO updateProducto(Integer id, ProductoDTO productoDTO) {
@@ -78,6 +79,7 @@ public class ProductoService {
         producto.setCategoriaId(productoDTO.getCategoriaId());
         producto.setEstaActivo(productoDTO.getEstaActivo());
         producto.setEsOferta(productoDTO.getEsOferta());
+        producto.setMensaje(productoDTO.getMensaje());
         
         Producto updatedProducto = productoRepository.save(producto);
         return convertToDTO(updatedProducto);
@@ -103,7 +105,8 @@ public class ProductoService {
                 producto.getCategoria() != null ? producto.getCategoria().getNombre() : null,
                 producto.getEstaActivo(),
                 producto.getEsOferta(),
-                producto.getFechaCreacion()
+                producto.getFechaCreacion(),
+                producto.getMensaje()
         );
     }
 }

@@ -51,6 +51,7 @@ export interface Producto {
   estaActivo: boolean;
   esOferta: boolean;
   fechaCreacion: string;
+  mensaje?: string; //objeto mensaje
 }
 
 export interface CarritoItem {
